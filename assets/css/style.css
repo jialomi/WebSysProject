@@ -1,0 +1,506 @@
+/*
+ * assets/css/style.css
+ * DriveEasy Car Rentals — Custom Stylesheet
+ * Extends Bootstrap 5 with brand-specific styles
+ * Colour palette: Dark (#212529) | Gold (#FFC107) | White (#FFFFFF)
+ */
+
+/* ── CSS Custom Properties ────────────────────────────────── */
+:root {
+    --brand-gold:    #FFC107;
+    --brand-dark:    #212529;
+    --brand-darker:  #141618;
+    --brand-light:   #F8F9FA;
+    --card-radius:   0.75rem;
+    --transition:    0.25s ease;
+}
+
+/* ── Global ───────────────────────────────────────────────── */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+    color: var(--brand-dark);
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ── Scrollbar (WebKit) ───────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ── Navbar ───────────────────────────────────────────────── */
+#mainNav {
+    border-bottom: 2px solid var(--brand-gold);
+}
+
+#mainNav .nav-link {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+}
+
+#mainNav .nav-link:hover,
+#mainNav .nav-link.active {
+    color: var(--brand-gold) !important;
+}
+
+/* ── Footer Links ─────────────────────────────────────────── */
+.footer-link {
+    color: #9ca3af;
+    transition: color var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--brand-gold);
+}
+
+.footer-social {
+    transition: color var(--transition);
+}
+
+.footer-social:hover {
+    color: var(--brand-gold) !important;
+}
+
+/* ── Hero Banner (index.php) ──────────────────────────────── */
+.hero-section {
+    position: relative;
+    min-height: 90vh;
+    background: linear-gradient(135deg, var(--brand-darker) 0%, #2d3748 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/assets/images/hero-bg.jpg') center/cover no-repeat;
+    opacity: 0.18;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,193,7,0.15);
+    border: 1px solid rgba(255,193,7,0.4);
+    color: var(--brand-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1.25rem;
+}
+
+.hero-title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.hero-title span {
+    color: var(--brand-gold);
+}
+
+/* ── Booking Search Widget ────────────────────────────────── */
+.booking-widget {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--card-radius);
+    padding: 1.75rem 2rem;
+}
+
+.booking-widget .form-control,
+.booking-widget .form-select {
+    background: rgba(255,255,255,0.92);
+    border: none;
+    border-radius: 0.5rem;
+    height: 3rem;
+    font-size: 0.9rem;
+}
+
+.booking-widget .form-label {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+}
+
+/* ── Stats Bar ────────────────────────────────────────────── */
+.stats-bar {
+    background: var(--brand-gold);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--brand-dark);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(33,37,41,0.7);
+}
+
+/* ── Section Headers ──────────────────────────────────────── */
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-gold);
+}
+
+.section-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* ── Car Cards ────────────────────────────────────────────── */
+.car-card {
+    border: none;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    transition: transform var(--transition), box-shadow var(--transition);
+    background: #fff;
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+}
+
+.car-card__img-wrap {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.car-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.car-card:hover .car-card__img-wrap img {
+    transform: scale(1.05);
+}
+
+.car-card__badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 50px;
+}
+
+.car-card__price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--brand-dark);
+}
+
+.car-card__price span {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.car-card__specs {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Type badge colors */
+.badge-sedan  { background: #e3f2fd; color: #1565c0; }
+.badge-SUV    { background: #e8f5e9; color: #2e7d32; }
+.badge-MPV    { background: #fff3e0; color: #e65100; }
+.badge-sports { background: #fce4ec; color: #c62828; }
+
+/* ── Filter Bar (fleet.php) ───────────────────────────────── */
+.filter-bar {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.filter-bar .form-range {
+    accent-color: var(--brand-gold);
+}
+
+/* ── Booking Cost Box ─────────────────────────────────────── */
+.cost-box {
+    background: linear-gradient(135deg, var(--brand-dark), #2d3748);
+    color: #fff;
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+}
+
+.cost-box__total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--brand-gold);
+}
+
+.cost-box__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cost-box__row:last-child { border-bottom: none; }
+
+/* ── Testimonial Cards ────────────────────────────────────── */
+.testimonial-card {
+    background: #fff;
+    border-radius: var(--card-radius);
+    padding: 1.75rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 4px solid var(--brand-gold);
+    height: 100%;
+}
+
+.star-rating .bi-star-fill { color: var(--brand-gold); }
+.star-rating .bi-star      { color: #dee2e6; }
+
+/* ── Status Badges (bookings) ─────────────────────────────── */
+.status-pending   { background: #fff3cd; color: #856404; }
+.status-confirmed { background: #d1e7dd; color: #0f5132; }
+.status-cancelled { background: #f8d7da; color: #842029; }
+
+/* ── Admin Sidebar ────────────────────────────────────────── */
+.admin-sidebar {
+    min-height: calc(100vh - 60px);
+    background: var(--brand-darker);
+    padding-top: 1.5rem;
+}
+
+.admin-sidebar .nav-link {
+    color: rgba(255,255,255,0.65);
+    font-weight: 500;
+    padding: 0.65rem 1.25rem;
+    border-radius: 0.4rem;
+    margin-bottom: 0.2rem;
+    transition: all var(--transition);
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    color: var(--brand-gold);
+    background: rgba(255,193,7,0.1);
+}
+
+.admin-sidebar .nav-link i {
+    width: 1.4em;
+    text-align: center;
+}
+
+.admin-stat-card {
+    border: none;
+    border-radius: var(--card-radius);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow: hidden;
+    transition: transform var(--transition);
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+}
+
+/* ── Forms ────────────────────────────────────────────────── */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--brand-gold);
+    box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.2);
+}
+
+.btn-brand {
+    background-color: var(--brand-gold);
+    border-color: var(--brand-gold);
+    color: var(--brand-dark);
+    font-weight: 700;
+    transition: all var(--transition);
+}
+
+.btn-brand:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: var(--brand-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255,193,7,0.4);
+}
+
+/* ── Page Hero (inner pages) ──────────────────────────────── */
+.page-hero {
+    background: linear-gradient(135deg, var(--brand-darker), #1e2a3a);
+    color: #fff;
+    padding: 4rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--brand-gold);
+}
+
+/* ── Car Detail Carousel ──────────────────────────────────── */
+.car-detail-carousel .carousel-inner {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+}
+
+.car-detail-carousel img {
+    height: 380px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.car-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.car-spec-item {
+    background: var(--brand-light);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+}
+
+.car-spec-item i {
+    color: var(--brand-gold);
+    font-size: 1.1rem;
+}
+
+/* ── Availability Badge ───────────────────────────────────── */
+.availability-available {
+    background: #d1e7dd;
+    color: #0f5132;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.availability-unavailable {
+    background: #f8d7da;
+    color: #842029;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* ── Promo code field ─────────────────────────────────────── */
+#promoResult {
+    font-size: 0.85rem;
+    min-height: 1.3em;
+    transition: all 0.2s;
+}
+
+/* ── Team Cards (about.php) ───────────────────────────────── */
+.team-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid var(--brand-gold);
+}
+
+/* ── Responsive utilities ─────────────────────────────────── */
+@media (max-width: 767.98px) {
+    .hero-section {
+        min-height: 70vh;
+        text-align: center;
+    }
+
+    .booking-widget {
+        padding: 1.25rem;
+    }
+
+    .car-detail-carousel img {
+        height: 220px;
+    }
+
+    .car-spec-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-box__total {
+        font-size: 2rem;
+    }
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Stagger animation helper classes */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
