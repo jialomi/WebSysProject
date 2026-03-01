@@ -361,7 +361,7 @@ $allCars = $pdo->query(
                         </div>
                         <!-- Daily Rate -->
                         <div class="col-sm-3">
-                            <label for="daily_rate" class="form-label fw-semibold">Daily Rate (RM) *</label>
+                            <label for="daily_rate" class="form-label fw-semibold">Daily Rate (SGD) *</label>
                             <input type="number" class="form-control" id="daily_rate" name="daily_rate"
                                    value="<?= htmlspecialchars($editCar['daily_rate'] ?? '') ?>"
                                    step="0.01" min="1" required>

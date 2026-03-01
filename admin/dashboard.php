@@ -344,7 +344,7 @@ new Chart(bCtx, {
                 yAxisID: 'y',
             },
             {
-                label: 'Revenue (RM)',
+                label: 'Revenue (SGD)',
                 data: <?= json_encode($chartRevenue) ?>,
                 type: 'line',
                 borderColor: '#0d6efd',
@@ -371,7 +371,7 @@ new Chart(bCtx, {
         },
         scales: {
             y:  { beginAtZero: true, title: { display: true, text: 'Bookings' }, ticks: { stepSize: 1 } },
-            y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Revenue (RM)' },
+            y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Revenue (SGD)' },
                   grid: { drawOnChartArea: false } },
         }
     }
