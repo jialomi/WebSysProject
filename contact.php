@@ -160,10 +160,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php
             $info = [
-                ['bi-telephone-fill', 'Phone',   '+603 1234 5678', 'tel:+60312345678'],
-                ['bi-envelope-fill',  'Email',   'hello@driveeasy.com.my', 'mailto:hello@driveeasy.com.my'],
+                ['bi-telephone-fill', 'Phone',   '+65 6123 4567', 'tel:+6561234567'],
+                ['bi-envelope-fill',  'Email',   'hello@driveeasy.com.sg', 'mailto:hello@driveeasy.com.sg'],
                 ['bi-clock-fill',     'Hours',   'Monday – Sunday: 8:00 AM – 9:00 PM', null],
-                ['bi-geo-alt-fill',   'Address', 'Level 12, Menara DriveEasy, KLCC, 50088 Kuala Lumpur', null],
+                ['bi-geo-alt-fill',   'Address', 'Level 12, One Raffles Place, 048616 Singapore', null],
             ];
             foreach ($info as $item): ?>
             <div class="d-flex gap-3 mb-4">
@@ -188,12 +188,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     Our Branches
                 </h3>
                 <ul class="list-unstyled small text-muted mb-0">
-                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Kuala Lumpur City Centre</li>
-                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>KLIA Terminal 1 & 2</li>
-                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Penang International Airport</li>
-                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Johor Bahru City Square</li>
-                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Kota Kinabalu Airport</li>
-                    <li class="mb-0"><i class="bi bi-geo me-2" aria-hidden="true"></i>Kuching International Airport</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Changi Airport Terminal 1</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Changi Airport Terminal 2</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Changi Airport Terminal 3</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Marina Bay Sands</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Orchard Road (Orchard MRT)</li>
+                    <li class="mb-1"><i class="bi bi-geo me-2" aria-hidden="true"></i>Jurong East</li>
+                    <li class="mb-0"><i class="bi bi-geo me-2" aria-hidden="true"></i>Woodlands</li>
                 </ul>
             </div>
         </div>

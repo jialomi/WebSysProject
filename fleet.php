@@ -27,7 +27,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse DriveEasy's full fleet of sedans, SUVs, MPVs and sports cars available for rent across Malaysia.">
+    <meta name="description" content="Browse DriveEasy's full fleet of sedans, SUVs, MPVs and sports cars available for rent across Singapore.">
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -100,8 +100,8 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
                            value="<?= (int)ceil($maxRate / 50) * 50 ?>"
                            aria-label="Maximum price per day">
                     <div class="d-flex justify-content-between small text-muted mt-1">
-                        <span>RM 50</span>
-                        <span>RM <?= (int)ceil($maxRate / 50) * 50 ?></span>
+                        <span>SGD 50</span>
+                        <span>SGD <?= (int)ceil($maxRate / 50) * 50 ?></span>
                     </div>
                 </div>
 
@@ -195,7 +195,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
 
                             <div class="mt-auto d-flex justify-content-between align-items-center">
                                 <div class="car-card__price">
-                                    RM <?= number_format((float)$car['daily_rate'], 2) ?>
+                                    SGD <?= number_format((float)$car['daily_rate'], 2) ?>
                                     <span>/ day</span>
                                 </div>
                                 <?php if ($car['status'] === 'available'): ?>

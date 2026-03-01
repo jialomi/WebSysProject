@@ -9,7 +9,7 @@
 require_once __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/auth.php';
 
-$pageTitle = 'DriveEasy Car Rentals – Affordable Car Hire in Malaysia';
+$pageTitle = 'DriveEasy Car Rentals – Affordable Car Hire in Singapore';
 $csrf = generateCsrfToken();
 
 // ── Fetch 3 featured (available) cars ──────────────────────
@@ -41,7 +41,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DriveEasy – rent sedans, SUVs, MPVs and sports cars across Malaysia at unbeatable daily rates.">
+    <meta name="description" content="DriveEasy – rent sedans, SUVs, MPVs and sports cars across Singapore at unbeatable daily rates.">
     <title><?= htmlspecialchars($pageTitle) ?></title>
 
     <!-- Bootstrap 5 CSS -->
@@ -66,7 +66,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
             <div class="col-lg-6 hero-content fade-in-up">
                 <div class="hero-badge">
                     <i class="bi bi-star-fill me-1" aria-hidden="true"></i>
-                    Malaysia's Most Trusted Car Rental
+                    Singapore's Most Trusted Car Rental
                 </div>
                 <h1 class="hero-title">
                     Drive the Road<br>
@@ -74,7 +74,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                 </h1>
                 <p class="text-secondary mt-3 mb-4 fs-5" style="max-width:480px; color: rgba(255,255,255,0.7) !important;">
                     Choose from <?= (int)$totalCars ?> premium vehicles. Flexible rentals,
-                    transparent pricing, and 24/7 support across Malaysia.
+                    transparent pricing, and 24/7 support across Singapore.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="/fleet.php" class="btn btn-warning btn-lg fw-bold px-4">
@@ -103,13 +103,13 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                                 <label class="form-label" for="pickup_location">Pick-up Location</label>
                                 <select class="form-select" name="location" id="pickup_location" required>
                                     <option value="" disabled selected>Select location…</option>
-                                    <option>Kuala Lumpur City Centre</option>
-                                    <option>KLIA Terminal 1</option>
-                                    <option>KLIA Terminal 2</option>
-                                    <option>Penang International Airport</option>
-                                    <option>Johor Bahru City Square</option>
-                                    <option>Kota Kinabalu Airport</option>
-                                    <option>Kuching International Airport</option>
+                                    <option>Changi Airport Terminal 1</option>
+                                    <option>Changi Airport Terminal 2</option>
+                                    <option>Changi Airport Terminal 3</option>
+                                    <option>Marina Bay Sands</option>
+                                    <option>Orchard Road (Orchard MRT)</option>
+                                    <option>Jurong East</option>
+                                    <option>Woodlands</option>
                                 </select>
                                 <div class="invalid-feedback">Please select a pick-up location.</div>
                             </div>
@@ -226,7 +226,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                         <!-- Price + CTA -->
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="car-card__price">
-                                RM <?= number_format($car['daily_rate'], 2) ?>
+                                SGD <?= number_format($car['daily_rate'], 2) ?>
                                 <span>/ day</span>
                             </div>
                             <a href="/car-details.php?id=<?= (int)$car['id'] ?>"
@@ -262,7 +262,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                 ['bi-shield-check',    'Fully Insured',        'Every vehicle comes with comprehensive insurance. Drive with peace of mind.'],
                 ['bi-currency-dollar', 'Best Price Guarantee', 'We price-match any like-for-like rental. Plus, promo codes for extra savings.'],
                 ['bi-headset',         '24/7 Support',         'Our team is always on call. Roadside assistance available nationwide.'],
-                ['bi-geo-alt',         '7 Convenient Locations','Pick up and drop off at airports, hotels, or city centres across Malaysia.'],
+                ['bi-geo-alt',         '7 Convenient Locations','Pick up and drop off at Changi Airport, MRT hubs, and hotels across Singapore.'],
                 ['bi-calendar-check',  'Flexible Bookings',    'Modify or cancel up to 24 hours before pick-up with no extra fees.'],
                 ['bi-star',            'Premium Fleet',        'All cars are under 2 years old, regularly serviced, and spotlessly clean.'],
             ];

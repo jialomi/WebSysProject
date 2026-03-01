@@ -44,7 +44,7 @@ $carouselImages = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rent the <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?> from DriveEasy at RM <?= number_format((float)$car['daily_rate'], 2) ?>/day.">
+    <meta name="description" content="Rent the <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?> from DriveEasy at SGD <?= number_format((float)$car['daily_rate'], 2) ?>/day.">
     <title><?= $pageTitle ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -173,7 +173,7 @@ $carouselImages = [
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
                         <div class="car-card__price fs-2">
-                            RM <?= number_format((float)$car['daily_rate'], 2) ?>
+                            SGD <?= number_format((float)$car['daily_rate'], 2) ?>
                         </div>
                         <div class="text-muted small">per day · inclusive of insurance</div>
                     </div>

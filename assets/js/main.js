@@ -60,12 +60,12 @@
         const total    = Math.max(0, subtotal - discount);
 
         if (daysDisplay)  daysDisplay.textContent  = days;
-        if (rateDisplay)  rateDisplay.textContent  = 'RM ' + dailyRate.toFixed(2);
-        if (subtotalEl)   subtotalEl.textContent   = 'RM ' + subtotal.toFixed(2);
+        if (rateDisplay)  rateDisplay.textContent  = 'SGD ' + dailyRate.toFixed(2);
+        if (subtotalEl)   subtotalEl.textContent   = 'SGD ' + subtotal.toFixed(2);
         if (discountEl)   discountEl.textContent   = discount > 0
-            ? '- RM ' + discount.toFixed(2)
-            : 'RM 0.00';
-        if (totalEl)      totalEl.textContent      = 'RM ' + total.toFixed(2);
+            ? '- SGD ' + discount.toFixed(2)
+            : 'SGD 0.00';
+        if (totalEl)      totalEl.textContent      = 'SGD ' + total.toFixed(2);
         if (totalInput)   totalInput.value         = total.toFixed(2);
     }
 
@@ -230,7 +230,7 @@
         // Update price label
         if (priceLabel) {
             priceLabel.textContent = isFinite(maxPrice)
-                ? 'RM ' + maxPrice.toFixed(0) + '/day'
+                ? 'SGD ' + maxPrice.toFixed(0) + '/day'
                 : 'Any price';
         }
 

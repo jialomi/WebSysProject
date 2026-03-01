@@ -13,7 +13,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about DriveEasy Car Rentals – our story, mission, and the team behind Malaysia's most trusted car rental service.">
+    <meta name="description" content="Learn about DriveEasy Car Rentals – our story, mission, and the team behind Singapore's most trusted car rental service.">
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -49,13 +49,13 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
                     From a Single Car to a National Fleet
                 </h2>
                 <p class="text-muted mt-3">
-                    DriveEasy was founded in 2015 by a small team of automotive enthusiasts in Kuala Lumpur
+                    DriveEasy was founded in 2015 by a small team of automotive enthusiasts in Singapore
                     with a simple belief: renting a car should be as easy as calling a friend. Starting with
-                    just one Toyota Vios and a shared office, we quickly earned a reputation for transparent
-                    pricing, spotless vehicles, and customer service that goes the extra mile.
+                    just one Toyota Vios and a shared office in Tanjong Pagar, we quickly earned a reputation
+                    for transparent pricing, spotless vehicles, and customer service that goes the extra mile.
                 </p>
                 <p class="text-muted">
-                    Today, DriveEasy operates across seven major cities in Malaysia, with a fleet of over
+                    Today, DriveEasy operates across seven locations in Singapore, with a fleet of over
                     50 premium vehicles spanning sedans, SUVs, MPVs, and sports cars. We're proud to have
                     served more than 10,000 happy customers — from weekend explorers to corporate travellers.
                 </p>
@@ -70,7 +70,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
                 <div class="bg-dark rounded-3 p-5 text-center" style="min-height:320px; display:flex; align-items:center; justify-content:center;">
                     <div>
                         <i class="bi bi-car-front-fill text-warning" style="font-size:5rem;" aria-hidden="true"></i>
-                        <p class="text-secondary mt-3 mb-0">Est. 2015 · Kuala Lumpur, Malaysia</p>
+                        <p class="text-secondary mt-3 mb-0">Est. 2015 · Singapore</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
             <div class="col-12 col-md-8 text-center">
                 <blockquote class="blockquote">
                     <p class="fs-4 fw-semibold fst-italic">
-                        "To make personal mobility accessible, affordable, and enjoyable for every Malaysian."
+                        "To make personal mobility accessible, affordable, and enjoyable for everyone in Singapore."
                     </p>
                 </blockquote>
             </div>
@@ -167,11 +167,11 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
         <div class="row g-0">
             <?php
             $milestones = [
-                ['2015', 'Founded in KL', 'Launched with 1 car and 3 founding team members.'],
-                ['2017', '1,000 Customers', 'Hit our first major milestone and expanded to Penang.'],
-                ['2019', 'Fleet of 20', 'Added SUVs and MPVs; opened Johor Bahru branch.'],
+                ['2015', 'Founded in Singapore', 'Launched with 1 car and 3 founding team members in Tanjong Pagar.'],
+                ['2017', '1,000 Customers', 'Hit our first major milestone and expanded island-wide.'],
+                ['2019', 'Fleet of 20', 'Added SUVs and MPVs; opened our Changi Airport branch.'],
                 ['2021', 'Digital-First Rebrand', 'Launched our new booking platform and mobile-friendly experience.'],
-                ['2023', '10,000 Customers', 'Reached nationwide coverage with 7 locations across Malaysia.'],
+                ['2023', '10,000 Customers', 'Reached island-wide coverage with 7 locations across Singapore.'],
                 ['2025', 'Going Green', 'First hybrid vehicles added to the fleet as part of our sustainability pledge.'],
             ];
             foreach ($milestones as $i => $m): ?>

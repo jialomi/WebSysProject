@@ -148,13 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pickupLocations = [
-    'Kuala Lumpur City Centre',
-    'KLIA Terminal 1',
-    'KLIA Terminal 2',
-    'Penang International Airport',
-    'Johor Bahru City Square',
-    'Kota Kinabalu Airport',
-    'Kuching International Airport',
+    'Changi Airport Terminal 1',
+    'Changi Airport Terminal 2',
+    'Changi Airport Terminal 3',
+    'Marina Bay Sands',
+    'Orchard Road (Orchard MRT)',
+    'Jurong East',
+    'Woodlands',
 ];
 ?>
 <!DOCTYPE html>
@@ -232,7 +232,7 @@ $pickupLocations = [
                         <div class="text-muted small">
                             <?= htmlspecialchars(ucfirst($car['type'])) ?> ·
                             <?= (int)$car['seats'] ?> seats ·
-                            RM <?= number_format((float)$car['daily_rate'], 2) ?>/day
+                            SGD <?= number_format((float)$car['daily_rate'], 2) ?>/day
                         </div>
                     </div>
                 </div>
@@ -351,15 +351,15 @@ $pickupLocations = [
                 </div>
                 <div class="cost-box__row">
                     <span>Daily Rate</span>
-                    <span id="calcRate">RM <?= number_format((float)$car['daily_rate'], 2) ?></span>
+                    <span id="calcRate">SGD <?= number_format((float)$car['daily_rate'], 2) ?></span>
                 </div>
                 <div class="cost-box__row">
                     <span>Subtotal</span>
-                    <span id="calcSubtotal">RM 0.00</span>
+                    <span id="calcSubtotal">SGD 0.00</span>
                 </div>
                 <div class="cost-box__row text-success">
                     <span>Promo Discount</span>
-                    <span id="calcDiscount">RM 0.00</span>
+                    <span id="calcDiscount">SGD 0.00</span>
                 </div>
 
                 <hr style="border-color:rgba(255,255,255,0.15);">
@@ -367,7 +367,7 @@ $pickupLocations = [
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="text-white fw-bold">Total</span>
                     <div class="cost-box__total" aria-live="polite" id="calcTotal">
-                        RM 0.00
+                        SGD 0.00
                     </div>
                 </div>
 

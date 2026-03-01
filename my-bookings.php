@@ -161,7 +161,7 @@ $bookings = $bookingsStmt->fetchAll();
             ['Total Bookings', count($bookings),        'bi-calendar-check', 'primary'],
             ['Confirmed',      $counts['confirmed'],    'bi-check-circle',   'success'],
             ['Pending',        $counts['pending'],      'bi-hourglass-split','warning'],
-            ['Total Spent',    'RM '.number_format($totalSpent,2), 'bi-wallet2', 'info'],
+            ['Total Spent',    'SGD '.number_format($totalSpent,2), 'bi-wallet2', 'info'],
         ];
         foreach ($statCards as $sc): ?>
         <div class="col-6 col-md-3">
@@ -228,12 +228,12 @@ $bookings = $bookingsStmt->fetchAll();
                 <!-- Cost -->
                 <div class="col-6 col-md-3 text-end">
                     <div class="fs-5 fw-bold text-dark">
-                        RM <?= number_format((float)$booking['total_cost'], 2) ?>
+                        SGD <?= number_format((float)$booking['total_cost'], 2) ?>
                     </div>
                     <?php if ($booking['discount_amount'] > 0): ?>
                     <div class="text-success small">
                         <i class="bi bi-tag me-1" aria-hidden="true"></i>
-                        Saved RM <?= number_format((float)$booking['discount_amount'], 2) ?>
+                        Saved SGD <?= number_format((float)$booking['discount_amount'], 2) ?>
                         <?php if ($booking['promo_code']): ?>
                         (<?= htmlspecialchars($booking['promo_code']) ?>)
                         <?php endif; ?>

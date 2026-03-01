@@ -215,7 +215,7 @@ if ($editId) {
                                             <?= htmlspecialchars($b['brand'] . ' ' . $b['model']) ?>
                                         </div>
                                         <div class="text-muted" style="font-size:0.75rem;">
-                                            RM <?= number_format((float)$b['daily_rate'],2) ?>/day
+                                            SGD <?= number_format((float)$b['daily_rate'],2) ?>/day
                                         </div>
                                     </td>
                                     <td class="small">
@@ -226,7 +226,7 @@ if ($editId) {
                                         <?= htmlspecialchars($b['pickup_location']) ?>
                                     </td>
                                     <td>
-                                        <div class="fw-semibold">RM <?= number_format((float)$b['total_cost'],2) ?></div>
+                                        <div class="fw-semibold">SGD <?= number_format((float)$b['total_cost'],2) ?></div>
                                         <?php if ($b['promo_code']): ?>
                                         <div class="text-success" style="font-size:0.72rem;">
                                             <?= htmlspecialchars($b['promo_code']) ?> applied
@@ -298,10 +298,10 @@ if ($editId) {
                                                     <dt class="col-sm-4">Dates</dt>
                                                     <dd class="col-sm-8"><?= htmlspecialchars(date('d M Y', strtotime($b['start_date']))) ?> → <?= htmlspecialchars(date('d M Y', strtotime($b['end_date']))) ?></dd>
                                                     <dt class="col-sm-4">Total</dt>
-                                                    <dd class="col-sm-8 fw-bold">RM <?= number_format((float)$b['total_cost'],2) ?></dd>
+                                                    <dd class="col-sm-8 fw-bold">SGD <?= number_format((float)$b['total_cost'],2) ?></dd>
                                                     <?php if ($b['discount_amount'] > 0): ?>
                                                     <dt class="col-sm-4">Discount</dt>
-                                                    <dd class="col-sm-8 text-success">- RM <?= number_format((float)$b['discount_amount'],2) ?> (<?= htmlspecialchars($b['promo_code']) ?>)</dd>
+                                                    <dd class="col-sm-8 text-success">- SGD <?= number_format((float)$b['discount_amount'],2) ?> (<?= htmlspecialchars($b['promo_code']) ?>)</dd>
                                                     <?php endif; ?>
                                                     <dt class="col-sm-4">Status</dt>
                                                     <dd class="col-sm-8 text-capitalize"><?= htmlspecialchars($b['status']) ?></dd>

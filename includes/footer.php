@@ -17,7 +17,7 @@ $currentYear = date('Y');
                     <span class="text-warning">Drive</span>Easy Car Rentals
                 </h5>
                 <p class="text-secondary small">
-                    Your trusted partner for affordable, reliable car rentals across Malaysia.
+                    Your trusted partner for affordable, reliable car rentals across Singapore.
                     Drive in comfort, drive with confidence.
                 </p>
                 <!-- Social icons -->
@@ -66,15 +66,15 @@ $currentYear = date('Y');
                 <address class="text-secondary small mb-0" style="font-style:normal;">
                     <p class="mb-1">
                         <i class="bi bi-geo-alt-fill me-2 text-warning" aria-hidden="true"></i>
-                        Level 12, Menara DriveEasy, KLCC, 50088 Kuala Lumpur
+                        Level 12, One Raffles Place, 048616 Singapore
                     </p>
                     <p class="mb-1">
                         <i class="bi bi-telephone-fill me-2 text-warning" aria-hidden="true"></i>
-                        <a href="tel:+60312345678" class="footer-link">+603 1234 5678</a>
+                        <a href="tel:+6561234567" class="footer-link">+65 6123 4567</a>
                     </p>
                     <p class="mb-1">
                         <i class="bi bi-envelope-fill me-2 text-warning" aria-hidden="true"></i>
-                        <a href="mailto:hello@driveeasy.com.my" class="footer-link">hello@driveeasy.com.my</a>
+                        <a href="mailto:hello@driveeasy.com.sg" class="footer-link">hello@driveeasy.com.sg</a>
                     </p>
                     <p class="mb-0">
                         <i class="bi bi-clock-fill me-2 text-warning" aria-hidden="true"></i>
@@ -90,7 +90,7 @@ $currentYear = date('Y');
         <!-- Bottom bar -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-secondary">
             <p class="mb-1 mb-md-0">
-                &copy; <?= $currentYear ?> DriveEasy Car Rentals Sdn. Bhd. All rights reserved.
+                &copy; <?= $currentYear ?> DriveEasy Car Rentals Pte. Ltd. All rights reserved.
             </p>
             <p class="mb-0">
                 <a href="#" class="footer-link me-3">Privacy Policy</a>

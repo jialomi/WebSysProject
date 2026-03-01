@@ -190,7 +190,7 @@ $carTypeData = $pdo->query(
             <div class="row g-3 mb-4">
                 <?php
                 $statCards = [
-                    ['Total Revenue',   'RM '.number_format((float)$stats['total_revenue'],2), 'bi-currency-dollar', 'success', '/admin/manage-bookings.php'],
+                    ['Total Revenue',   'SGD '.number_format((float)$stats['total_revenue'],2), 'bi-currency-dollar', 'success', '/admin/manage-bookings.php'],
                     ['Total Bookings',  $stats['total_bookings'],  'bi-calendar-check',  'primary', '/admin/manage-bookings.php'],
                     ['Pending Bookings',$stats['pending_books'],   'bi-hourglass-split', 'warning', '/admin/manage-bookings.php?status=pending'],
                     ['Fleet Size',      $stats['total_cars'],      'bi-car-front',       'info',    '/admin/manage-cars.php'],
@@ -274,7 +274,7 @@ $carTypeData = $pdo->query(
                                     <td class="fw-semibold">#<?= (int)$b['id'] ?></td>
                                     <td><?= htmlspecialchars($b['customer']) ?></td>
                                     <td><?= htmlspecialchars($b['brand'] . ' ' . $b['model']) ?></td>
-                                    <td>RM <?= number_format((float)$b['total_cost'], 2) ?></td>
+                                    <td>SGD <?= number_format((float)$b['total_cost'], 2) ?></td>
                                     <td>
                                         <span class="badge status-<?= htmlspecialchars($b['status']) ?> px-2 py-1 text-capitalize">
                                             <?= htmlspecialchars($b['status']) ?>
@@ -364,7 +364,7 @@ new Chart(bCtx, {
             tooltip: {
                 callbacks: {
                     label: ctx => ctx.datasetIndex === 1
-                        ? ' RM ' + ctx.raw.toFixed(2)
+                        ? ' SGD ' + ctx.raw.toFixed(2)
                         : ' ' + ctx.raw + ' booking(s)'
                 }
             }

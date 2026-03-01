@@ -257,7 +257,7 @@ $allCars = $pdo->query(
                                             <?= htmlspecialchars(ucfirst($car['type'])) ?>
                                         </span>
                                     </td>
-                                    <td class="fw-semibold">RM <?= number_format((float)$car['daily_rate'], 2) ?></td>
+                                    <td class="fw-semibold">SGD <?= number_format((float)$car['daily_rate'], 2) ?></td>
                                     <td>
                                         <?php if ($car['status'] === 'available'): ?>
                                         <span class="badge bg-success">Available</span>
