@@ -154,11 +154,8 @@ INSERT INTO cars (brand, model, year, type, daily_rate, status, image_path, desc
 INSERT INTO bookings (user_id, car_id, pickup_location, start_date, end_date, total_cost, status, promo_code, discount_amount) VALUES
 (2, 1, 'Orchard Road (Orchard MRT)',   '2026-01-10', '2026-01-13', 255.00, 'confirmed', NULL,    0.00),
 (2, 2, 'Changi Airport Terminal 1',   '2026-02-01', '2026-02-05', 480.00, 'confirmed', 'SAVE10', 53.33),
-(3, 3, 'Changi Airport Terminal 2',   '2026-01-20', '2026-01-22', 360.00, 'completed', NULL,    0.00),
+(3, 3, 'Changi Airport Terminal 2',   '2026-01-20', '2026-01-22', 360.00, 'confirmed', NULL,    0.00),
 (3, 5, 'Marina Bay Sands',            '2026-03-05', '2026-03-08', 315.00, 'pending',   NULL,    0.00);
-
--- Update booking 3 status to 'confirmed' for demo purposes (completed not in ENUM; keep confirmed)
-UPDATE bookings SET status='confirmed' WHERE id=3;
 
 INSERT INTO testimonials (user_id, booking_id, rating, message, is_active) VALUES
 (2, 1, 5, 'Absolutely fantastic service! The Toyota Camry was spotless and the booking process was seamless. Will definitely rent again!', 1),
