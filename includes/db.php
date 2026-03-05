@@ -13,8 +13,8 @@
 // ── Database credentials ─────────────────────────────────────
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'driveeasy_db');
-define('DB_USER', 'root');       // Change for production
-define('DB_PASS', '');           // Change for production
+define('DB_USER', 'inf1005-sqldev');       // Change for production
+define('DB_PASS', 'sasuke8744');           // Change for production
 define('DB_CHAR', 'utf8mb4');
 
 /**

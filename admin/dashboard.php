@@ -42,12 +42,16 @@ $recentBookings = $pdo->query(
 
 // ── Monthly Bookings for Chart.js (last 12 months) ─────────
 $monthlyData = $pdo->query(
-    "SELECT DATE_FORMAT(created_at, '%b %Y') AS month_label,
-            DATE_FORMAT(created_at, '%Y-%m') AS month_key,
+    "SELECT month_key,
+            DATE_FORMAT(STR_TO_DATE(CONCAT(month_key,'-01'), '%Y-%m-%d'), '%b %Y') AS month_label,
             COUNT(*) AS booking_count,
             COALESCE(SUM(total_cost),0) AS revenue
-     FROM bookings
-     WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+     FROM (
+        SELECT DATE_FORMAT(created_at, '%Y-%m') AS month_key,
+               total_cost
+        FROM bookings
+        WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+     ) t
      GROUP BY month_key
      ORDER BY month_key ASC"
 )->fetchAll();
@@ -371,7 +375,7 @@ new Chart(bCtx, {
         },
         scales: {
             y:  { beginAtZero: true, title: { display: true, text: 'Bookings' }, ticks: { stepSize: 1 } },
-            y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Revenue (SGD)' },
+            y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Revenue (RM)' },
                   grid: { drawOnChartArea: false } },
         }
     }

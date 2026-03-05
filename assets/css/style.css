@@ -61,6 +61,19 @@ img {
     color: var(--brand-gold) !important;
 }
 
+.navbar-brand img{
+    transition: transform .2s ease;
+}
+
+.navbar-brand:hover img{
+    transform: scale(1.05);
+}
+
+.navbar-logo{
+    height:40px;
+    width:auto;
+}
+
 /* ── Footer Links ─────────────────────────────────────────── */
 .footer-link {
     color: #9ca3af;

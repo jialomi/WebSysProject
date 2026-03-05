@@ -23,11 +23,9 @@ function navActive(string $page): string {
     <div class="container">
 
         <!-- Brand / Logo -->
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/index.php">
-            <img src="/assets/images/logo.svg" alt="DriveEasy logo" width="32" height="32"
-                 onerror="this.style.display='none'">
-            <span class="text-warning">Drive</span><span class="text-white">Easy</span>
-        </a>
+<a class="navbar-brand" href="/index.php">
+    <img src="/assets/images/logo.png" alt="DriveEasy" class="navbar-logo">
+</a>
 
         <!-- Mobile toggle -->
         <button class="navbar-toggler" type="button"
