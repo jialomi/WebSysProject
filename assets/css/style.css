@@ -199,12 +199,6 @@ img {
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    /* use dark text by default for sufficient contrast on light backgrounds */
-    color: var(--brand-dark);
-}
-
-/* utility modifier when gold label is desired on dark backgrounds */
-.section-label--gold {
     color: var(--brand-gold);
 }
 
