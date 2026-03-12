@@ -182,7 +182,7 @@ $pickupLocations = [
                 <li class="breadcrumb-item"><a href="/index.php" class="text-warning">Home</a></li>
                 <li class="breadcrumb-item"><a href="/fleet.php" class="text-warning">Fleet</a></li>
                 <li class="breadcrumb-item">
-                    <a href="/car-details.php?id=<?= (int)$carId ?>" class="text-warning">
+                    <a href="/car-details.php?id=<?= (int)$carId ?>" class="text-warning" aria-label="View Car Details: <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>">
                         <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>
                     </a>
                 </li>
@@ -223,10 +223,9 @@ $pickupLocations = [
                 <!-- Car summary strip -->
                 <div class="d-flex gap-3 bg-light rounded-3 p-3 mb-4 align-items-center">
                     <img src="<?= htmlspecialchars($car['image_path']) ?>"
-                         alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>"
-                         width="80" height="55"
-                         style="object-fit:cover; border-radius:8px;"
-                         onerror="this.src='/assets/images/placeholder.jpg'">
+                        alt="" 
+                        loading="lazy"
+                        onerror="this.src='/assets/images/placeholder.jpg'">
                     <div>
                         <div class="fw-bold"><?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?></div>
                         <div class="text-muted small">
@@ -328,7 +327,7 @@ $pickupLocations = [
                             </button>
                             <p class="text-muted small text-center mt-2 mb-0">
                                 By booking you agree to our
-                                <a href="#" class="text-warning">Terms &amp; Conditions</a>.
+                                <a href="#" class="text-warning" aria-label="Read Terms and Conditions">Terms &amp; Conditions</a>.
                             </p>
                         </div>
 

@@ -4,11 +4,11 @@
  * DriveEasy Car Rentals — Admin Car Management (Full CRUD)
  *
  * Actions:
- *  - List all cars
- *  - Add new car (with image upload)
- *  - Edit existing car
- *  - Delete car
- *  - Toggle availability status
+ * - List all cars
+ * - Add new car (with image upload)
+ * - Edit existing car
+ * - Delete car
+ * - Toggle availability status
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
@@ -172,7 +172,6 @@ $allCars = $pdo->query(
 
 <div class="d-flex" style="min-height:100vh;">
 
-    <!-- Sidebar (same as dashboard) -->
     <nav class="admin-sidebar d-none d-lg-flex flex-column" style="width:240px;flex-shrink:0;"
          aria-label="Admin navigation">
         <a href="/admin/dashboard.php" class="d-flex align-items-center gap-2 px-4 py-3 text-decoration-none mb-2">
@@ -183,31 +182,30 @@ $allCars = $pdo->query(
         </a>
         <div class="px-3">
             <ul class="nav flex-column">
-                <li><a class="nav-link" href="/admin/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-                <li><a class="nav-link active" href="/admin/manage-cars.php"><i class="bi bi-car-front me-2"></i>Manage Cars</a></li>
-                <li><a class="nav-link" href="/admin/manage-bookings.php"><i class="bi bi-calendar-check me-2"></i>Manage Bookings</a></li>
-                <li><a class="nav-link" href="/fleet.php"><i class="bi bi-grid me-2"></i>View Site</a></li>
+                <li><a class="nav-link" href="/admin/dashboard.php"><i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>Dashboard</a></li>
+                <li><a class="nav-link active" href="/admin/manage-cars.php"><i class="bi bi-car-front me-2" aria-hidden="true"></i>Manage Cars</a></li>
+                <li><a class="nav-link" href="/admin/manage-bookings.php"><i class="bi bi-calendar-check me-2" aria-hidden="true"></i>Manage Bookings</a></li>
+                <li><a class="nav-link" href="/fleet.php"><i class="bi bi-grid me-2" aria-hidden="true"></i>View Site</a></li>
             </ul>
             <hr class="border-secondary my-3">
             <ul class="nav flex-column">
-                <li><a class="nav-link text-danger" href="/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                <li><a class="nav-link text-danger" href="/logout.php"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Main content -->
     <div class="flex-grow-1 bg-light">
         <header class="bg-white shadow-sm px-4 py-3 d-flex justify-content-between align-items-center sticky-top">
             <div class="d-flex align-items-center gap-3">
                 <button class="btn btn-sm btn-outline-secondary d-lg-none" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#adminSidebar">
-                    <i class="bi bi-list"></i>
+                        data-bs-toggle="offcanvas" data-bs-target="#adminSidebar" aria-label="Open admin menu" title="Open admin menu">
+                    <i class="bi bi-list" aria-hidden="true"></i>
                 </button>
                 <h1 class="h5 mb-0 fw-bold">Manage Cars</h1>
             </div>
             <button class="btn btn-warning btn-sm fw-semibold"
-                    data-bs-toggle="modal" data-bs-target="#carModal">
-                <i class="bi bi-plus-lg me-1"></i> Add New Car
+                    data-bs-toggle="modal" data-bs-target="#carModal" aria-label="Add New Car" title="Add New Car">
+                <i class="bi bi-plus-lg me-1" aria-hidden="true"></i> Add New Car
             </button>
         </header>
 
@@ -220,20 +218,19 @@ $allCars = $pdo->query(
             </div>
             <?php endif; ?>
 
-            <!-- Cars Table -->
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Car</th>
-                                    <th>Type</th>
-                                    <th>Daily Rate</th>
-                                    <th>Status</th>
-                                    <th>Active Bookings</th>
-                                    <th>Actions</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Car</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Daily Rate</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Active Bookings</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -241,7 +238,7 @@ $allCars = $pdo->query(
                                 <tr>
                                     <td>
                                         <img src="/<?= htmlspecialchars($car['image_path']) ?>"
-                                             alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>"
+                                             alt=""
                                              width="70" height="48"
                                              style="object-fit:cover;border-radius:6px;"
                                              onerror="this.src='/assets/images/placeholder.jpg'">
@@ -269,19 +266,19 @@ $allCars = $pdo->query(
                                     <td>
                                         <div class="d-flex gap-1">
                                             <a href="/admin/manage-cars.php?edit=<?= (int)$car['id'] ?>"
-                                               class="btn btn-sm btn-outline-primary"
-                                               title="Edit car">
+                                            class="btn btn-sm btn-outline-primary"
+                                            aria-label="Edit <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>">
                                                 <i class="bi bi-pencil" aria-hidden="true"></i>
                                             </a>
                                             <a href="/car-details.php?id=<?= (int)$car['id'] ?>"
-                                               class="btn btn-sm btn-outline-info"
-                                               target="_blank" title="View on site"
-                                               rel="noopener">
+                                            class="btn btn-sm btn-outline-info"
+                                            target="_blank" rel="noopener"
+                                            aria-label="View <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?> on site">
                                                 <i class="bi bi-eye" aria-hidden="true"></i>
                                             </a>
                                             <a href="/admin/manage-cars.php?delete=<?= (int)$car['id'] ?>"
-                                               class="btn btn-sm btn-outline-danger btn-cancel-booking"
-                                               title="Delete car">
+                                            class="btn btn-sm btn-outline-danger btn-cancel-booking"
+                                            aria-label="Delete <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>" title="Delete Car">
                                                 <i class="bi bi-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>
@@ -301,7 +298,6 @@ $allCars = $pdo->query(
     </div>
 </div>
 
-<!-- ── Add / Edit Car Modal ─────────────────────────────── -->
 <div class="modal fade" id="carModal" tabindex="-1"
      aria-labelledby="carModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -310,7 +306,7 @@ $allCars = $pdo->query(
                 <h2 class="modal-title h5 fw-bold" id="carModalLabel">
                     <?= $editCar ? 'Edit Car' : 'Add New Car' ?>
                 </h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
             </div>
             <form action="/admin/manage-cars.php<?= $editId ? '?edit=' . $editId : '' ?>"
                   method="POST" enctype="multipart/form-data"
@@ -323,33 +319,29 @@ $allCars = $pdo->query(
                     <?php endif; ?>
 
                     <div class="row g-3">
-                        <!-- Brand -->
                         <div class="col-sm-6">
-                            <label for="brand" class="form-label fw-semibold">Brand *</label>
+                            <label for="brand" class="form-label fw-semibold">Brand <span class="text-danger" aria-hidden="true">*</span></label>
                             <input type="text" class="form-control" id="brand" name="brand"
                                    value="<?= htmlspecialchars($editCar['brand'] ?? '') ?>"
                                    maxlength="50" required placeholder="e.g. Toyota">
                             <div class="invalid-feedback">Required.</div>
                         </div>
-                        <!-- Model -->
                         <div class="col-sm-6">
-                            <label for="model" class="form-label fw-semibold">Model *</label>
+                            <label for="model" class="form-label fw-semibold">Model <span class="text-danger" aria-hidden="true">*</span></label>
                             <input type="text" class="form-control" id="model" name="model"
                                    value="<?= htmlspecialchars($editCar['model'] ?? '') ?>"
                                    maxlength="50" required placeholder="e.g. Camry">
                             <div class="invalid-feedback">Required.</div>
                         </div>
-                        <!-- Year -->
                         <div class="col-sm-3">
-                            <label for="year" class="form-label fw-semibold">Year *</label>
+                            <label for="year" class="form-label fw-semibold">Year <span class="text-danger" aria-hidden="true">*</span></label>
                             <input type="number" class="form-control" id="year" name="year"
                                    value="<?= (int)($editCar['year'] ?? date('Y')) ?>"
                                    min="2000" max="<?= date('Y') + 1 ?>" required>
                             <div class="invalid-feedback">Required.</div>
                         </div>
-                        <!-- Type -->
                         <div class="col-sm-3">
-                            <label for="type" class="form-label fw-semibold">Type *</label>
+                            <label for="type" class="form-label fw-semibold">Type <span class="text-danger" aria-hidden="true">*</span></label>
                             <select class="form-select" id="type" name="type" required>
                                 <?php foreach (['sedan','SUV','MPV','sports'] as $t): ?>
                                 <option value="<?= $t ?>"
@@ -359,22 +351,19 @@ $allCars = $pdo->query(
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <!-- Daily Rate -->
                         <div class="col-sm-3">
-                            <label for="daily_rate" class="form-label fw-semibold">Daily Rate (SGD) *</label>
+                            <label for="daily_rate" class="form-label fw-semibold">Daily Rate (SGD) <span class="text-danger" aria-hidden="true">*</span></label>
                             <input type="number" class="form-control" id="daily_rate" name="daily_rate"
                                    value="<?= htmlspecialchars($editCar['daily_rate'] ?? '') ?>"
                                    step="0.01" min="1" required>
                             <div class="invalid-feedback">Required.</div>
                         </div>
-                        <!-- Seats -->
                         <div class="col-sm-3">
-                            <label for="seats" class="form-label fw-semibold">Seats *</label>
+                            <label for="seats" class="form-label fw-semibold">Seats <span class="text-danger" aria-hidden="true">*</span></label>
                             <input type="number" class="form-control" id="seats" name="seats"
                                    value="<?= (int)($editCar['seats'] ?? 5) ?>"
                                    min="1" max="9" required>
                         </div>
-                        <!-- Transmission -->
                         <div class="col-sm-4">
                             <label for="transmission" class="form-label fw-semibold">Transmission</label>
                             <select class="form-select" id="transmission" name="transmission">
@@ -382,32 +371,28 @@ $allCars = $pdo->query(
                                 <option value="manual"    <?= (($editCar['transmission'] ?? '') === 'manual')    ? 'selected' : '' ?>>Manual</option>
                             </select>
                         </div>
-                        <!-- Fuel Type -->
                         <div class="col-sm-4">
                             <label for="fuel_type" class="form-label fw-semibold">Fuel Type</label>
                             <input type="text" class="form-control" id="fuel_type" name="fuel_type"
                                    value="<?= htmlspecialchars($editCar['fuel_type'] ?? 'Petrol') ?>"
                                    maxlength="30">
                         </div>
-                        <!-- Status -->
                         <div class="col-sm-4">
-                            <label for="status" class="form-label fw-semibold">Status *</label>
+                            <label for="status" class="form-label fw-semibold">Status <span class="text-danger" aria-hidden="true">*</span></label>
                             <select class="form-select" id="status" name="status" required>
                                 <option value="available"   <?= (($editCar['status'] ?? '') === 'available')   ? 'selected' : '' ?>>Available</option>
                                 <option value="unavailable" <?= (($editCar['status'] ?? '') === 'unavailable') ? 'selected' : '' ?>>Unavailable</option>
                             </select>
                         </div>
-                        <!-- Description -->
                         <div class="col-12">
                             <label for="description" class="form-label fw-semibold">Description</label>
                             <textarea class="form-control" id="description" name="description"
                                       rows="3" maxlength="1000"
                                       placeholder="Vehicle description visible to customers…"><?= htmlspecialchars($editCar['description'] ?? '') ?></textarea>
                         </div>
-                        <!-- Image Upload -->
                         <div class="col-12">
                             <label for="car_image" class="form-label fw-semibold">
-                                Car Image <?= $editCar ? '(leave blank to keep current)' : '' ?>
+                                Car Image <?= $editCar ? '<span class="text-muted fw-normal">(leave blank to keep current)</span>' : '' ?>
                             </label>
                             <input type="file" class="form-control" id="car_image"
                                    name="car_image" accept="image/jpeg,image/png,image/webp">

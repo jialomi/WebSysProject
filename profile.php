@@ -86,9 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
 }
 
-// Booking stats
-$bookingCount = (int)$pdo->prepare("SELECT COUNT(*) FROM bookings WHERE user_id = :id")
-    ->execute([':id' => $userId]) ?: 0;
+// ── FIXED: Booking stats query ──────────────────────────────
 $bookingCountStmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE user_id = :id");
 $bookingCountStmt->execute([':id' => $userId]);
 $bookingCount = (int)$bookingCountStmt->fetchColumn();
@@ -132,7 +130,6 @@ $bookingCount = (int)$bookingCountStmt->fetchColumn();
 
     <div class="row g-4">
 
-        <!-- Profile sidebar -->
         <div class="col-12 col-md-4 col-lg-3">
             <div class="card border-0 shadow-sm text-center p-4">
                 <div class="bg-warning rounded-circle mx-auto mb-3 fw-bold fs-2 d-flex align-items-center justify-content-center"
@@ -155,94 +152,68 @@ $bookingCount = (int)$bookingCountStmt->fetchColumn();
             </div>
         </div>
 
-        <!-- Settings panels -->
         <div class="col-12 col-md-8 col-lg-9">
 
-            <!-- Update Profile -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white fw-bold py-3">
                     <i class="bi bi-person-fill me-2 text-warning" aria-hidden="true"></i>
                     Personal Information
                 </div>
                 <div class="card-body p-4">
-                    <form action="/profile.php" method="POST"
-                          class="needs-validation" novalidate>
-                        <input type="hidden" name="csrf_token"
-                               value="<?= htmlspecialchars($csrf) ?>">
+                    <form action="/profile.php" method="POST" class="needs-validation" novalidate>
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
                         <input type="hidden" name="action" value="update_profile">
 
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="name" class="form-label fw-semibold">Full Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                       value="<?= htmlspecialchars($user['name']) ?>"
-                                       required maxlength="100">
+                                       value="<?= htmlspecialchars($user['name']) ?>" required maxlength="100">
                                 <div class="invalid-feedback">Name is required.</div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="email" class="form-label fw-semibold">Email Address</label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                       value="<?= htmlspecialchars($user['email']) ?>"
-                                       required maxlength="150">
+                                       value="<?= htmlspecialchars($user['email']) ?>" required maxlength="150">
                                 <div class="invalid-feedback">Valid email is required.</div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-warning fw-semibold">
-                                    Save Changes
-                                </button>
+                                <button type="submit" class="btn btn-warning fw-semibold">Save Changes</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Change Password -->
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white fw-bold py-3">
                     <i class="bi bi-shield-lock me-2 text-warning" aria-hidden="true"></i>
                     Change Password
                 </div>
                 <div class="card-body p-4">
-                    <form action="/profile.php" method="POST"
-                          class="needs-validation" novalidate>
-                        <input type="hidden" name="csrf_token"
-                               value="<?= htmlspecialchars($csrf) ?>">
+                    <form action="/profile.php" method="POST" class="needs-validation" novalidate>
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
                         <input type="hidden" name="action" value="change_password">
 
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <label for="current_password" class="form-label fw-semibold">
-                                    Current Password
-                                </label>
-                                <input type="password" class="form-control"
-                                       id="current_password" name="current_password"
-                                       required autocomplete="current-password">
+                                <label for="current_password" class="form-label fw-semibold">Current Password</label>
+                                <input type="password" class="form-control" id="current_password" name="current_password" required autocomplete="current-password">
                                 <div class="invalid-feedback">Required.</div>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <label for="new_password" class="form-label fw-semibold">
-                                    New Password
-                                </label>
-                                <input type="password" class="form-control"
-                                       id="new_password" name="new_password"
-                                       required minlength="8"
-                                       autocomplete="new-password"
-                                       placeholder="Min. 8 characters">
+                                <label for="new_password" class="form-label fw-semibold">New Password</label>
+                                <input type="password" class="form-control" id="new_password" name="new_password" required minlength="8" autocomplete="new-password" placeholder="Min. 8 characters">
                                 <div class="invalid-feedback">Min. 8 characters.</div>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <label for="confirm_password" class="form-label fw-semibold">
-                                    Confirm New Password
-                                </label>
-                                <input type="password" class="form-control"
-                                       id="confirm_password" name="confirm_password"
-                                       required autocomplete="new-password">
+                                <label for="confirm_password" class="form-label fw-semibold">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required autocomplete="new-password">
                                 <div class="invalid-feedback">Passwords must match.</div>
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-outline-dark fw-semibold">
-                                    <i class="bi bi-lock me-2" aria-hidden="true"></i>
-                                    Update Password
+                                    <i class="bi bi-lock me-2" aria-hidden="true"></i> Update Password
                                 </button>
                             </div>
                         </div>

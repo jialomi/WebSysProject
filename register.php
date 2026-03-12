@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </label>
                             <input type="email" class="form-control" id="email" name="email"
                                    value="<?= htmlspecialchars($formData['email'] ?? '') ?>"
-                                   autocomplete="username email"
+                                   autocomplete="email"
                                    maxlength="150" placeholder="you@example.com"
                                    required>
                             <div class="invalid-feedback">Please enter a valid email address.</div>

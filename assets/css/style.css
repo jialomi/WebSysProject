@@ -7,12 +7,86 @@
 
 /* ── CSS Custom Properties ────────────────────────────────── */
 :root {
-    --brand-gold:    #FFC107;
-    --brand-dark:    #212529;
-    --brand-darker:  #141618;
-    --brand-light:   #F8F9FA;
-    --card-radius:   0.75rem;
-    --transition:    0.25s ease;
+    --brand-gold: #FFC107;
+    --brand-gold-text: #735500;
+    /* Darker gold for WCAG AA text contrast on light bg */
+    --brand-dark: #212529;
+    --brand-darker: #141618;
+    --brand-light: #F8F9FA;
+    --card-radius: 0.75rem;
+    --transition: 0.25s ease;
+}
+
+.text-warning {
+    color: var(--brand-gold-text) !important;
+}
+
+/* Light-background muted text: #54595e on white/#f4f6f9 = 7.1:1 ✓ */
+.text-muted,
+.text-secondary {
+    color: #54595e !important;
+}
+
+/* Dark-background muted text: #9ca3af on #212529 = 4.6:1 ✓ */
+.bg-dark .text-muted,
+.bg-dark .text-secondary,
+.page-hero .text-muted,
+.page-hero .text-secondary,
+.hero-section .text-muted,
+.hero-section .text-secondary,
+.cost-box .text-muted,
+.cost-box .text-secondary,
+.admin-sidebar .text-muted,
+.admin-sidebar .text-secondary {
+    color: #9ca3af !important;
+}
+
+/* Light-background success/info text */
+.text-success {
+    color: #12633a !important;
+    /* >4.5:1 on white */
+}
+
+.text-info {
+    color: #0b5ed7 !important;
+    /* >4.5:1 on white */
+}
+
+/* Dark-background success/info text */
+.bg-dark .text-success,
+.cost-box .text-success {
+    color: #75e1a0 !important;
+    /* >4.5:1 on #212529 */
+}
+
+.bg-dark .text-info,
+.cost-box .text-info {
+    color: #6db3f8 !important;
+    /* >4.5:1 on #212529 */
+}
+
+/* Dark-background warning text (bright gold) */
+.bg-dark .text-warning,
+.page-hero .text-warning,
+.hero-section .text-warning,
+.navbar-dark .text-warning,
+.admin-sidebar .text-warning {
+    color: var(--brand-gold) !important;
+}
+
+/* Dark-background danger text (lighter red) */
+.bg-dark .text-danger,
+.admin-sidebar .text-danger {
+    color: #f17a84 !important; /* >4.5:1 on #141618/#212529 */
+}
+
+.bg-warning {
+    background-color: var(--brand-gold) !important;
+    color: var(--brand-dark) !important;
+}
+
+.badge.bg-warning {
+    color: var(--brand-dark) !important;
 }
 
 /* ── Global ───────────────────────────────────────────────── */
@@ -40,10 +114,22 @@ img {
 }
 
 /* ── Scrollbar (WebKit) ───────────────────────────────────── */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 /* ── Navbar ───────────────────────────────────────────────── */
 #mainNav {
@@ -61,22 +147,23 @@ img {
     color: var(--brand-gold) !important;
 }
 
-.navbar-brand img{
+.navbar-brand img {
     transition: transform .2s ease;
 }
 
-.navbar-brand:hover img{
+.navbar-brand:hover img {
     transform: scale(1.05);
 }
 
-.navbar-logo{
-    height:40px;
-    width:auto;
+.navbar-logo {
+    height: 40px;
+    width: auto;
 }
 
 /* ── Footer Links ─────────────────────────────────────────── */
 .footer-link {
-    color: #9ca3af;
+    color: #adb5bd;
+    /* >4.5:1 on #212529 = 7.3:1 ✓ */
     transition: color var(--transition);
 }
 
@@ -118,8 +205,8 @@ img {
 
 .hero-badge {
     display: inline-block;
-    background: rgba(255,193,7,0.15);
-    border: 1px solid rgba(255,193,7,0.4);
+    background: rgba(255, 193, 7, 0.15);
+    border: 1px solid rgba(255, 193, 7, 0.4);
     color: var(--brand-gold);
     font-size: 0.8rem;
     font-weight: 600;
@@ -144,16 +231,16 @@ img {
 
 /* ── Booking Search Widget ────────────────────────────────── */
 .booking-widget {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--card-radius);
     padding: 1.75rem 2rem;
 }
 
 .booking-widget .form-control,
 .booking-widget .form-select {
-    background: rgba(255,255,255,0.92);
+    background: rgba(255, 255, 255, 0.92);
     border: none;
     border-radius: 0.5rem;
     height: 3rem;
@@ -161,7 +248,8 @@ img {
 }
 
 .booking-widget .form-label {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255, 255, 255, 0.85);
+    /* boosted from 0.75 for >4.5:1 on dark hero ✓ */
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -190,7 +278,8 @@ img {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(33,37,41,0.7);
+    color: rgba(33, 37, 41, 0.85);
+    /* >4.5:1 on #FFC107 ✓ */
 }
 
 /* ── Section Headers ──────────────────────────────────────── */
@@ -199,7 +288,8 @@ img {
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--brand-gold);
+    color: var(--brand-gold-text);
+    /* #735500 >4.5:1 on white ✓ */
 }
 
 .section-title {
@@ -213,14 +303,14 @@ img {
     border: none;
     border-radius: var(--card-radius);
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
     transition: transform var(--transition), box-shadow var(--transition);
     background: #fff;
 }
 
 .car-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
 }
 
 .car-card__img-wrap {
@@ -262,28 +352,50 @@ img {
 .car-card__price span {
     font-size: 0.8rem;
     font-weight: 400;
-    color: #6c757d;
+    color: #54595e;
+    /* >4.5:1 on #fff ✓ */
 }
 
 .car-card__specs {
     display: flex;
     gap: 1rem;
     font-size: 0.8rem;
-    color: #6c757d;
+    color: #54595e;
+    /* >4.5:1 on #fff ✓ */
 }
 
 /* Type badge colors */
-.badge-sedan  { background: #e3f2fd; color: #1565c0; }
-.badge-SUV    { background: #e8f5e9; color: #2e7d32; }
-.badge-MPV    { background: #fff3e0; color: #e65100; }
-.badge-sports { background: #fce4ec; color: #c62828; }
+.badge-sedan {
+    background: #e3f2fd;
+    color: #0b4a99;
+}
+
+/* >4.5:1 on #e3f2fd */
+.badge-SUV {
+    background: #e8f5e9;
+    color: #1e5a22;
+}
+
+/* >4.5:1 on #e8f5e9 */
+.badge-MPV {
+    background: #fff3e0;
+    color: #a33900;
+}
+
+/* >4.5:1 on #fff3e0, fixing original #e65100 */
+.badge-sports {
+    background: #fce4ec;
+    color: #9c1f1f;
+}
+
+/* >4.5:1 on #fce4ec */
 
 /* ── Filter Bar (fleet.php) ───────────────────────────────── */
 .filter-bar {
     background: #fff;
     border-radius: var(--card-radius);
     padding: 1.25rem 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .filter-bar .form-range {
@@ -308,30 +420,49 @@ img {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255, 255, 255, 0.85);
+    /* boosted from 0.75 for >4.5:1 on dark ✓ */
     padding: 0.3rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.cost-box__row:last-child { border-bottom: none; }
+.cost-box__row:last-child {
+    border-bottom: none;
+}
 
 /* ── Testimonial Cards ────────────────────────────────────── */
 .testimonial-card {
     background: #fff;
     border-radius: var(--card-radius);
     padding: 1.75rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
     border-left: 4px solid var(--brand-gold);
     height: 100%;
 }
 
-.star-rating .bi-star-fill { color: var(--brand-gold); }
-.star-rating .bi-star      { color: #dee2e6; }
+.star-rating .bi-star-fill {
+    color: var(--brand-gold);
+}
+
+.star-rating .bi-star {
+    color: #dee2e6;
+}
 
 /* ── Status Badges (bookings) ─────────────────────────────── */
-.status-pending   { background: #fff3cd; color: #856404; }
-.status-confirmed { background: #d1e7dd; color: #0f5132; }
-.status-cancelled { background: #f8d7da; color: #842029; }
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
 
 /* ── Admin Sidebar ────────────────────────────────────────── */
 .admin-sidebar {
@@ -341,7 +472,8 @@ img {
 }
 
 .admin-sidebar .nav-link {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.82);
+    /* boosted from 0.65 for >4.5:1 on #141618 ✓ */
     font-weight: 500;
     padding: 0.65rem 1.25rem;
     border-radius: 0.4rem;
@@ -352,7 +484,7 @@ img {
 .admin-sidebar .nav-link:hover,
 .admin-sidebar .nav-link.active {
     color: var(--brand-gold);
-    background: rgba(255,193,7,0.1);
+    background: rgba(255, 193, 7, 0.1);
 }
 
 .admin-sidebar .nav-link i {
@@ -363,7 +495,7 @@ img {
 .admin-stat-card {
     border: none;
     border-radius: var(--card-radius);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
     overflow: hidden;
     transition: transform var(--transition);
 }
@@ -376,7 +508,7 @@ img {
 .form-control:focus,
 .form-select:focus {
     border-color: var(--brand-gold);
-    box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.2);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.2);
 }
 
 .btn-brand {
@@ -392,7 +524,7 @@ img {
     border-color: #e0a800;
     color: var(--brand-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(255,193,7,0.4);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
 }
 
 /* ── Page Hero (inner pages) ──────────────────────────────── */
@@ -407,7 +539,9 @@ img {
 .page-hero::after {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 3px;
     background: var(--brand-gold);
 }
@@ -441,7 +575,8 @@ img {
 }
 
 .car-spec-item i {
-    color: var(--brand-gold);
+    color: var(--brand-gold-text);
+    /* #735500 >4.5:1 on #F8F9FA ✓ */
     font-size: 1.1rem;
 }
 
@@ -505,8 +640,15 @@ img {
 
 /* ── Animations ───────────────────────────────────────────── */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .fade-in-up {
@@ -514,6 +656,14 @@ img {
 }
 
 /* Stagger animation helper classes */
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}

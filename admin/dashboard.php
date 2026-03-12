@@ -4,11 +4,11 @@
  * DriveEasy Car Rentals — Admin Dashboard
  *
  * Features:
- *  - Summary stat cards
- *  - Chart.js bar chart: bookings per month (last 12 months)
- *  - Recent bookings table
- *  - Recent contact messages
- *  - Requires admin role
+ * - Summary stat cards
+ * - Chart.js bar chart: bookings per month (last 12 months)
+ * - Recent bookings table
+ * - Recent contact messages
+ * - Requires admin role
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
@@ -103,13 +103,10 @@ $carTypeData = $pdo->query(
 </head>
 <body>
 
-<!-- Admin Layout: Sidebar + Main -->
 <div class="d-flex" style="min-height:100vh;">
 
-    <!-- ── SIDEBAR ────────────────────────────────────────── -->
     <nav class="admin-sidebar d-none d-lg-flex flex-column" style="width:240px; flex-shrink:0;"
          aria-label="Admin navigation">
-        <!-- Brand -->
         <a href="/admin/dashboard.php" class="d-flex align-items-center gap-2 px-4 py-3 text-decoration-none mb-2">
             <span class="fw-bold fs-5">
                 <span class="text-warning">Drive</span><span class="text-white">Easy</span>
@@ -163,13 +160,10 @@ $carTypeData = $pdo->query(
         </div>
     </nav>
 
-    <!-- ── MAIN CONTENT ──────────────────────────────────── -->
     <div class="flex-grow-1 bg-light">
 
-        <!-- Top bar -->
         <header class="bg-white shadow-sm px-4 py-3 d-flex justify-content-between align-items-center sticky-top">
             <div class="d-flex align-items-center gap-3">
-                <!-- Mobile menu toggle -->
                 <button class="btn btn-sm btn-outline-secondary d-lg-none" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#adminSidebar"
                         aria-controls="adminSidebar" aria-label="Open menu">
@@ -190,7 +184,6 @@ $carTypeData = $pdo->query(
         <main class="p-4">
             <?= renderFlash() ?>
 
-            <!-- ── STAT CARDS ─────────────────────────────── -->
             <div class="row g-3 mb-4">
                 <?php
                 $statCards = [
@@ -215,14 +208,12 @@ $carTypeData = $pdo->query(
                 <?php endforeach; ?>
             </div>
 
-            <!-- ── CHARTS ROW ────────────────────────────── -->
             <div class="row g-4 mb-4">
 
-                <!-- Bookings per month (Bar) -->
                 <div class="col-12 col-lg-8">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-white fw-bold py-3">
-                            <i class="bi bi-bar-chart me-2 text-warning" aria-hidden="true"></i>
+                            <i class="bi bi-bar-chart me-2" style="color:#735500;" aria-hidden="true"></i>
                             Bookings &amp; Revenue – Last 12 Months
                         </div>
                         <div class="card-body">
@@ -232,11 +223,10 @@ $carTypeData = $pdo->query(
                     </div>
                 </div>
 
-                <!-- Fleet type breakdown (Doughnut) -->
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-white fw-bold py-3">
-                            <i class="bi bi-pie-chart me-2 text-warning" aria-hidden="true"></i>
+                            <i class="bi bi-pie-chart me-2" style="color:#735500;" aria-hidden="true"></i>
                             Fleet by Type
                         </div>
                         <div class="card-body d-flex align-items-center justify-content-center">
@@ -247,14 +237,13 @@ $carTypeData = $pdo->query(
                 </div>
             </div>
 
-            <!-- ── RECENT BOOKINGS TABLE ─────────────────── -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white fw-bold py-3 d-flex justify-content-between">
                     <span>
-                        <i class="bi bi-list-check me-2 text-warning" aria-hidden="true"></i>
+                        <i class="bi bi-list-check me-2" style="color:#735500;" aria-hidden="true"></i>
                         Recent Bookings
                     </span>
-                    <a href="/admin/manage-bookings.php" class="btn btn-sm btn-outline-warning">
+                    <a href="/admin/manage-bookings.php" class="btn btn-sm btn-outline-dark">
                         View All
                     </a>
                 </div>
@@ -289,7 +278,8 @@ $carTypeData = $pdo->query(
                                     </td>
                                     <td>
                                         <a href="/admin/manage-bookings.php?edit=<?= (int)$b['id'] ?>"
-                                           class="btn btn-xs btn-outline-secondary btn-sm">
+                                           class="btn btn-xs btn-outline-secondary btn-sm"
+                                           aria-label="Edit booking #<?= (int)$b['id'] ?>">
                                             Edit
                                         </a>
                                     </td>
@@ -304,19 +294,14 @@ $carTypeData = $pdo->query(
                 </div>
             </div>
 
-        </main><!-- /main -->
-    </div><!-- /main content -->
-</div><!-- /flex row -->
-
-<!-- Mobile Sidebar Offcanvas -->
-<div class="offcanvas offcanvas-start bg-dark text-white" id="adminSidebar"
+        </main></div></div><div class="offcanvas offcanvas-start bg-dark text-white" id="adminSidebar"
      tabindex="-1" aria-labelledby="adminSidebarLabel">
     <div class="offcanvas-header">
-        <h2 class="offcanvas-title fw-bold" id="adminSidebarLabel">
+        <div class="offcanvas-title h2 fw-bold" id="adminSidebarLabel">
             <span class="text-warning">Drive</span>Easy Admin
-        </h2>
+        </div>
         <button type="button" class="btn-close btn-close-white"
-                data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                data-bs-dismiss="offcanvas" aria-label="Close admin menu"></button>
     </div>
     <div class="offcanvas-body p-3">
         <ul class="nav flex-column">
@@ -328,7 +313,6 @@ $carTypeData = $pdo->query(
     </div>
 </div>
 
-<!-- Bootstrap + Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 

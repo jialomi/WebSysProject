@@ -57,7 +57,7 @@ $carouselImages = [
 <main>
 
 <!-- Page Hero -->
-<div class="page-hero" role="banner">
+<div class="page-hero">
     <div class="container">
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">

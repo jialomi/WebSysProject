@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="email" class="form-label fw-semibold">Email Address</label>
                             <input type="email" class="form-control" id="email" name="email"
                                    value="<?= $emailVal ?>"
-                                   autocomplete="username email"
+                                   autocomplete="email"
                                    placeholder="you@example.com"
                                    required>
                             <div class="invalid-feedback">Please enter your email address.</div>
@@ -194,11 +194,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Demo credentials for testing -->
             <div class="card border-warning mt-3 bg-warning bg-opacity-10">
                 <div class="card-body py-2 px-3">
-                    <p class="small mb-1 fw-semibold text-warning">Demo Credentials</p>
-                    <p class="small mb-1 text-muted">
+                    <p class="small mb-1 fw-semibold" style="color:#664d03;">Demo Credentials</p>
+                    <p class="small mb-1" style="color:#332701;">
                         <strong>Admin:</strong> admin@driveeasy.com / admin123
                     </p>
-                    <p class="small mb-0 text-muted">
+                    <p class="small mb-0" style="color:#332701;">
                         <strong>User:</strong> john@example.com / user123
                     </p>
                 </div>

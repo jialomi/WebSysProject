@@ -201,9 +201,9 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                     <!-- Car image -->
                     <div class="car-card__img-wrap">
                         <img src="<?= htmlspecialchars($car['image_path']) ?>"
-                             alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?> rental car"
-                             loading="lazy"
-                             onerror="this.src='/assets/images/placeholder.jpg'">
+                            alt="" 
+                            loading="lazy"
+                            onerror="this.src='/assets/images/placeholder.jpg'">
                         <span class="car-card__badge badge-<?= htmlspecialchars($car['type']) ?>">
                             <?= htmlspecialchars(ucfirst($car['type'])) ?>
                         </span>
@@ -296,7 +296,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
             <div class="col-12 col-md-4">
                 <div class="testimonial-card">
                     <!-- Star rating -->
-                    <div class="star-rating mb-3" aria-label="<?= (int)$t['rating'] ?> out of 5 stars">
+                    <div class="star-rating mb-3" role="img" aria-label="<?= (int)$t['rating'] ?> out of 5 stars">
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <i class="bi <?= $i <= (int)$t['rating'] ? 'bi-star-fill' : 'bi-star' ?>"
                                aria-hidden="true"></i>

@@ -40,7 +40,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
 <main>
 
 <!-- Page Hero -->
-<div class="page-hero" role="banner">
+<div class="page-hero">
     <div class="container">
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">
@@ -158,9 +158,9 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
                         <!-- Image -->
                         <div class="car-card__img-wrap">
                             <img src="<?= htmlspecialchars($car['image_path']) ?>"
-                                 alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?> rental car"
-                                 loading="lazy"
-                                 onerror="this.src='/assets/images/placeholder.jpg'">
+                                alt="" 
+                                loading="lazy"
+                                onerror="this.src='/assets/images/placeholder.jpg'">
                             <span class="car-card__badge badge-<?= htmlspecialchars($car['type']) ?>">
                                 <?= htmlspecialchars(ucfirst($car['type'])) ?>
                             </span>

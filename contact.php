@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
 
-<div class="page-hero" role="banner">
+<div class="page-hero">
     <div class="container">
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div>
                     <div class="fw-semibold"><?= $item[1] ?></div>
                     <?php if ($item[3]): ?>
-                    <a href="<?= $item[3] ?>" class="text-muted small"><?= htmlspecialchars($item[2]) ?></a>
+                    <a href="<?= $item[3] ?>" class="text-muted small" aria-label="<?= htmlspecialchars($item[1]) ?>: <?= htmlspecialchars($item[2]) ?>"><?= htmlspecialchars($item[2]) ?></a>
                     <?php else: ?>
                     <div class="text-muted small"><?= htmlspecialchars($item[2]) ?></div>
                     <?php endif; ?>

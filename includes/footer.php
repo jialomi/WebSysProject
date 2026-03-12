@@ -13,9 +13,9 @@ $currentYear = date('Y');
 
             <!-- Brand column -->
             <div class="col-12 col-md-4">
-                <h5 class="fw-bold mb-3">
+                <h2 class="h5 fw-bold mb-3">
                     <span class="text-warning">Drive</span>Easy Car Rentals
-                </h5>
+                </h2>
                 <p class="text-secondary small">
                     Your trusted partner for affordable, reliable car rentals across Singapore.
                     Drive in comfort, drive with confidence.
@@ -39,7 +39,7 @@ $currentYear = date('Y');
 
             <!-- Quick links column -->
             <div class="col-6 col-md-2">
-                <h6 class="text-uppercase fw-semibold text-warning mb-3">Quick Links</h6>
+                <h3 class="h6 text-uppercase fw-semibold text-warning mb-3">Quick Links</h3>
                 <ul class="list-unstyled small">
                     <li class="mb-1"><a href="/index.php"   class="footer-link">Home</a></li>
                     <li class="mb-1"><a href="/fleet.php"   class="footer-link">Our Fleet</a></li>
@@ -51,7 +51,7 @@ $currentYear = date('Y');
 
             <!-- Account links column -->
             <div class="col-6 col-md-2">
-                <h6 class="text-uppercase fw-semibold text-warning mb-3">My Account</h6>
+                <h3 class="h6 text-uppercase fw-semibold text-warning mb-3">My Account</h3>
                 <ul class="list-unstyled small">
                     <li class="mb-1"><a href="/login.php"       class="footer-link">Login</a></li>
                     <li class="mb-1"><a href="/register.php"    class="footer-link">Register</a></li>
@@ -62,7 +62,7 @@ $currentYear = date('Y');
 
             <!-- Contact info column -->
             <div class="col-12 col-md-4">
-                <h6 class="text-uppercase fw-semibold text-warning mb-3">Contact Us</h6>
+                <h3 class="h6 text-uppercase fw-semibold text-warning mb-3">Contact Us</h3>
                 <address class="text-secondary small mb-0" style="font-style:normal;">
                     <p class="mb-1">
                         <i class="bi bi-geo-alt-fill me-2 text-warning" aria-hidden="true"></i>

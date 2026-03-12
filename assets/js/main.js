@@ -360,7 +360,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* -- Star rating interactive widget (testimonial form) -- */
 (function initStarRating() {
-    const stars      = document.querySelectorAll('.star-input');
+    const stars       = document.querySelectorAll('.star-input');
     const ratingInput = document.getElementById('rating');
 
     if (!stars.length || !ratingInput) return;
@@ -374,6 +374,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 s.classList.toggle('bi-star-fill', sv <= val);
                 s.classList.toggle('bi-star',      sv >  val);
             });
+        });
+        
+        // Added keyboard support for accessibility
+        star.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click(); // Trigger the click event
+            }
         });
 
         star.addEventListener('mouseenter', function () {

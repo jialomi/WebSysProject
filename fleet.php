@@ -40,16 +40,16 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
 <main>
 
 <!-- Page Hero -->
-<div class="page-hero" role="banner">
+<div class="page-hero">
     <div class="container">
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">
                 <li class="breadcrumb-item"><a href="/index.php" class="text-warning">Home</a></li>
-                <li class="breadcrumb-item active text-white">Our Fleet</li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Our Fleet</li>
             </ol>
         </nav>
-        <h1 class="fw-bold text-white mb-1">Our 5 Fleet</h1>
-        <p class="text-secondary mb-0">
+        <h1 class="fw-bold text-white mb-1">Our Fleet</h1>
+        <p class="text-white-50 mb-0">
             <?= count($allCars) ?> vehicles available — filter to find your perfect ride.
         </p>
     </div>
@@ -73,7 +73,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
                             <i class="bi bi-search text-muted" aria-hidden="true"></i>
                         </span>
                         <input type="text" id="searchQuery" class="form-control border-start-0"
-                               placeholder="Brand or model…" aria-label="Search cars">
+                            placeholder="Brand or model…" aria-label="Search by brand or model">
                     </div>
                 </div>
 
@@ -172,9 +172,9 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
                         </div>
 
                         <div class="card-body p-4 d-flex flex-column">
-                            <h3 class="h6 fw-bold mb-0">
+                            <h2 class="h6 fw-bold mb-0">
                                 <?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>
-                            </h3>
+                            </h2>
                             <p class="text-muted small mb-3"><?= htmlspecialchars($car['year']) ?></p>
 
                             <!-- Specs -->
