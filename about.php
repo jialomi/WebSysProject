@@ -23,10 +23,8 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
 
 <?php include __DIR__ . '/includes/navbar.php'; ?>
 
-<main>
-
 <!-- Page Hero -->
-<div class="page-hero" role="banner">
+<header class="page-hero" role="banner">
     <div class="container">
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">
@@ -37,7 +35,9 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
         <h1 class="fw-bold text-white mb-1">About DriveEasy</h1>
         <p class="text-secondary mb-0">Our story, mission, and the people who make it happen.</p>
     </div>
-</div>
+</header>
+
+<main>
 
 <!-- ── COMPANY STORY ─────────────────────────────────────── -->
 <section class="py-5 bg-white" aria-labelledby="story-heading">
