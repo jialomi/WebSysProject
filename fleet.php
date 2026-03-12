@@ -45,10 +45,10 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
         <nav aria-label="Breadcrumb">
             <ol class="breadcrumb mb-2">
                 <li class="breadcrumb-item"><a href="/index.php" class="text-warning">Home</a></li>
-                <li class="breadcrumb-item active text-white">Our 5 Fleet</li>
+                <li class="breadcrumb-item active text-white">Our Fleet</li>
             </ol>
         </nav>
-        <h1 class="fw-bold text-white mb-1">Our Fleet</h1>
+        <h1 class="fw-bold text-white mb-1">Our 5 Fleet</h1>
         <p class="text-secondary mb-0">
             <?= count($allCars) ?> vehicles available — filter to find your perfect ride.
         </p>
