@@ -68,8 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!password_verify($current, $hashRow['password_hash'])) {
             $errors[] = 'Current password is incorrect.';
         }
-        if (strlen($newPw) < 8)               $errors[] = 'New password must be at least 8 characters.';
-        if ($newPw !== $confirm)              $errors[] = 'New passwords do not match.';
+        if (strlen($newPw) < 8)                    $errors[] = 'New password must be at least 8 characters.';
+        elseif (!preg_match('/[A-Z]/', $newPw))    $errors[] = 'New password must contain at least one uppercase letter.';
+        elseif (!preg_match('/[0-9]/', $newPw))    $errors[] = 'New password must contain at least one number.';
+        if ($newPw !== $confirm)                    $errors[] = 'New passwords do not match.';
 
         if (empty($errors)) {
             $newHash = password_hash($newPw, PASSWORD_BCRYPT);
@@ -134,7 +136,7 @@ $bookingCount = (int)$bookingCountStmt->fetchColumn();
             <div class="card border-0 shadow-sm text-center p-4">
                 <div class="bg-warning rounded-circle mx-auto mb-3 fw-bold fs-2 d-flex align-items-center justify-content-center"
                      style="width:80px;height:80px;" aria-hidden="true">
-                    <?= mb_strtoupper(mb_substr(htmlspecialchars($user['name']), 0, 1)) ?>
+                    <?= strtoupper(substr(htmlspecialchars($user['name']), 0, 1)) ?>
                 </div>
                 <h2 class="h6 fw-bold mb-0"><?= htmlspecialchars($user['name']) ?></h2>
                 <p class="text-muted small mb-3"><?= htmlspecialchars($user['email']) ?></p>

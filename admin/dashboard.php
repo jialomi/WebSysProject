@@ -137,6 +137,21 @@ $carTypeData = $pdo->query(
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/admin/manage-messages.php">
+                        <i class="bi bi-envelope me-2" aria-hidden="true"></i>Messages
+                        <?php if ($stats['unread_msgs'] > 0): ?>
+                        <span class="badge bg-danger ms-auto">
+                            <?= (int)$stats['unread_msgs'] ?>
+                        </span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/manage-promotion.php">
+                        <i class="bi bi-tag me-2" aria-hidden="true"></i>Promotions
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/fleet.php">
                         <i class="bi bi-grid me-2" aria-hidden="true"></i>View Site
                     </a>
@@ -192,7 +207,7 @@ $carTypeData = $pdo->query(
                     ['Pending Bookings',$stats['pending_books'],   'bi-hourglass-split', 'warning', '/admin/manage-bookings.php?status=pending'],
                     ['Fleet Size',      $stats['total_cars'],      'bi-car-front',       'info',    '/admin/manage-cars.php'],
                     ['Customers',       $stats['total_users'],     'bi-people',          'secondary','/index.php'],
-                    ['Unread Messages', $stats['unread_msgs'],     'bi-envelope',        'danger',  '/contact.php'],
+                    ['Unread Messages', $stats['unread_msgs'],     'bi-envelope',        'danger',  '/admin/manage-messages.php'],
                 ];
                 foreach ($statCards as $sc): ?>
                 <div class="col-6 col-md-4 col-xl-2">
@@ -308,6 +323,8 @@ $carTypeData = $pdo->query(
             <li class="nav-item"><a class="nav-link text-white" href="/admin/dashboard.php">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-cars.php">Manage Cars</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-bookings.php">Manage Bookings</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-messages.php">Messages</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-promotion.php">Promotions</a></li>
             <li class="nav-item"><a class="nav-link text-danger"  href="/logout.php">Logout</a></li>
         </ul>
     </div>

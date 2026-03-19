@@ -193,18 +193,18 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
                                 </span>
                             </div>
 
-                            <div class="mt-auto d-flex justify-content-between align-items-center">
-                                <div class="car-card__price">
+                            <div class="mt-auto">
+                                <div class="car-card__price mb-2">
                                     SGD <?= number_format((float)$car['daily_rate'], 2) ?>
                                     <span>/ day</span>
                                 </div>
                                 <?php if ($car['status'] === 'available'): ?>
                                 <a href="/car-details.php?id=<?= (int)$car['id'] ?>"
-                                   class="btn btn-warning btn-sm fw-semibold">
+                                   class="btn btn-warning btn-sm fw-semibold w-100">
                                     View &amp; Book
                                 </a>
                                 <?php else: ?>
-                                <span class="badge bg-secondary">Unavailable</span>
+                                <span class="badge bg-secondary w-100 py-2">Unavailable</span>
                                 <?php endif; ?>
                             </div>
                         </div>

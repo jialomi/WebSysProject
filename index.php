@@ -308,7 +308,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                     <div class="d-flex align-items-center gap-2">
                         <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center fw-bold"
                              style="width:36px;height:36px;font-size:0.9rem;" aria-hidden="true">
-                            <?= mb_strtoupper(mb_substr($t['reviewer_name'], 0, 1)) ?>
+                            <?= strtoupper(substr($t['reviewer_name'], 0, 1)) ?>
                         </div>
                         <div>
                             <div class="fw-semibold small">

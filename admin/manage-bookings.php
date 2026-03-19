@@ -94,6 +94,8 @@ foreach ($countStmt->fetchAll() as $row) {
                 <li><a class="nav-link" href="/admin/dashboard.php"><i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>Dashboard</a></li>
                 <li><a class="nav-link" href="/admin/manage-cars.php"><i class="bi bi-car-front me-2" aria-hidden="true"></i>Manage Cars</a></li>
                 <li><a class="nav-link active" href="/admin/manage-bookings.php"><i class="bi bi-calendar-check me-2" aria-hidden="true"></i>Manage Bookings</a></li>
+                <li><a class="nav-link" href="/admin/manage-messages.php"><i class="bi bi-envelope me-2" aria-hidden="true"></i>Messages</a></li>
+                <li><a class="nav-link" href="/admin/manage-promotion.php"><i class="bi bi-tag me-2" aria-hidden="true"></i>Promotions</a></li>
                 <li><a class="nav-link" href="/fleet.php"><i class="bi bi-grid me-2" aria-hidden="true"></i>View Site</a></li>
             </ul>
             <hr class="border-secondary my-3">

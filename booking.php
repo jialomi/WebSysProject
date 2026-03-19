@@ -221,19 +221,21 @@ $pickupLocations = [
                 </h2>
 
                 <!-- Car summary strip -->
-                <div class="d-flex gap-3 bg-light rounded-3 p-3 mb-4 align-items-center">
-                    <img src="<?= htmlspecialchars($car['image_path']) ?>"
-                        alt="" 
-                        loading="lazy"
-                        onerror="this.src='/assets/images/placeholder.jpg'">
-                    <div>
-                        <div class="fw-bold"><?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?></div>
+                <div class="bg-light rounded-3 p-3 mb-4">
+                    <div class="mb-2">
+                        <div class="fw-bold fs-6"><?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?></div>
                         <div class="text-muted small">
                             <?= htmlspecialchars(ucfirst($car['type'])) ?> ·
                             <?= (int)$car['seats'] ?> seats ·
                             SGD <?= number_format((float)$car['daily_rate'], 2) ?>/day
                         </div>
                     </div>
+                    <img src="<?= htmlspecialchars($car['image_path']) ?>"
+                         alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>"
+                         class="w-100 rounded"
+                         style="max-height:300px; object-fit:cover;"
+                         loading="lazy"
+                         onerror="this.src='/assets/images/placeholder.jpg'">
                 </div>
 
                 <form action="/booking.php?car_id=<?= (int)$carId ?>" method="POST"
@@ -301,7 +303,7 @@ $pickupLocations = [
                                        placeholder="Enter code e.g. SAVE10"
                                        maxlength="30"
                                        autocomplete="off">
-                                <button class="btn btn-outline-warning fw-semibold"
+                                <button class="btn btn-warning fw-semibold"
                                         type="button" id="applyPromoBtn">
                                     Apply
                                 </button>
@@ -327,7 +329,7 @@ $pickupLocations = [
                             </button>
                             <p class="text-muted small text-center mt-2 mb-0">
                                 By booking you agree to our
-                                <a href="#" class="text-warning" aria-label="Read Terms and Conditions">Terms &amp; Conditions</a>.
+                                <a href="#" class="text-decoration-underline" style="color:#735500;" aria-label="Read Terms and Conditions">Terms &amp; Conditions</a>.
                             </p>
                         </div>
 
@@ -374,12 +376,12 @@ $pickupLocations = [
                     <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
                     Inclusive of insurance & taxes. Final cost shown above.
                 </p>
-            </div>
 
-            <!-- Availability Notice -->
-            <div class="alert alert-info mt-3 small" role="note">
-                <i class="bi bi-calendar-check me-2" aria-hidden="true"></i>
-                Availability is checked in real time. If your chosen dates are taken, you'll be notified.
+                <!-- Availability Notice -->
+                <div class="alert alert-info mt-3 small mb-0" role="note">
+                    <i class="bi bi-calendar-check me-2" aria-hidden="true"></i>
+                    Availability is checked in real time. If your chosen dates are taken, you'll be notified.
+                </div>
             </div>
         </div>
 

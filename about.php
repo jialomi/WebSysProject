@@ -145,7 +145,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
                     <div class="bg-warning rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center fw-bold fs-4"
                          style="width:80px;height:80px;"
                          aria-hidden="true">
-                        <?= htmlspecialchars(mb_strtoupper(mb_substr($member[0], 0, 1))) ?>
+                        <?= htmlspecialchars(strtoupper(substr($member[0], 0, 1))) ?>
                     </div>
                     <h3 class="h6 fw-bold mb-1"><?= htmlspecialchars($member[0]) ?></h3>
                     <p class="text-warning small fw-semibold mb-2"><?= htmlspecialchars($member[1]) ?></p>
