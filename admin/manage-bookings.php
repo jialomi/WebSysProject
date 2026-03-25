@@ -270,6 +270,8 @@ foreach ($countStmt->fetchAll() as $row) {
                     </div>
                 </div>
 
+            <?= $modalsHtml ?>
+
             </main>
         </div>
     </div>
