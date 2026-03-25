@@ -152,7 +152,7 @@ $carouselImages = [
                 <div class="car-spec-item">
                     <i class="bi <?= $spec[0] ?>" aria-hidden="true"></i>
                     <div>
-                        <div style="font-size:0.72rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em;">
+                        <div style="font-size:0.72rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">
                             <?= htmlspecialchars($spec[1]) ?>
                         </div>
                         <div class="fw-semibold" style="font-size:0.88rem;">
