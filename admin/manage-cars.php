@@ -424,6 +424,28 @@ $allCars = $pdo->query(
     </div>
 </div>
 
+<!-- Mobile offcanvas sidebar -->
+<div class="offcanvas offcanvas-start bg-dark text-white" id="adminSidebar"
+     tabindex="-1" aria-labelledby="adminSidebarLabel">
+    <div class="offcanvas-header">
+        <div class="offcanvas-title h2 fw-bold" id="adminSidebarLabel">
+            <span class="text-warning">Drive</span>Easy Admin
+        </div>
+        <button type="button" class="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas" aria-label="Close admin menu"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/dashboard.php">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-cars.php">Manage Cars</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-bookings.php">Manage Bookings</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-messages.php">Messages</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/admin/manage-promotion.php">Promotions</a></li>
+            <li class="nav-item"><a class="nav-link text-danger" href="/logout.php">Logout</a></li>
+        </ul>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/main.js"></script>
 
