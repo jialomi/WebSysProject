@@ -1,6 +1,0 @@
-{
-    "admin\\manage-cars.php": [
-        "Empty <button> tag without aria-label.",
-        "Possible Duplicate IDs found (check if within PHP conditionals): imagePreview"
-    ]
-}
