@@ -620,7 +620,7 @@ img {
 }
 
 .car-detail-carousel img {
-    height: 380px;
+    height: 500px;
     object-fit: cover;
     width: 100%;
 }
@@ -703,7 +703,7 @@ img {
     }
 
     .car-detail-carousel img {
-        height: 220px;
+        height: 300px;
     }
 
     .car-spec-grid {
