@@ -86,69 +86,55 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
                 </div>
             </div>
 
-            <!-- Right: Quick Booking Widget -->
+            <!-- Right: Value Proposition Cards -->
             <div class="col-lg-6 fade-in-up delay-2">
-                <div class="booking-widget">
-                    <h2 class="text-white fw-bold mb-4 fs-4">
-                        <i class="bi bi-search me-2 text-warning" aria-hidden="true"></i>
-                        Quick Search
+                <div class="vp-container">
+                    <h2 class="vp-container__heading">
+                        <i class="bi bi-shield-check me-2" aria-hidden="true"></i>
+                        Why DriveEasy?
                     </h2>
-                    <!-- This form navigates to fleet.php with GET params -->
-                    <form action="/fleet.php" method="GET" class="needs-validation" novalidate>
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
-
-                        <div class="row g-3">
-                            <!-- Pick-up Location -->
-                            <div class="col-12">
-                                <label class="form-label" for="pickup_location">Pick-up Location</label>
-                                <select class="form-select" name="location" id="pickup_location" required>
-                                    <option value="" disabled selected>Select location…</option>
-                                    <option>Changi Airport Terminal 1</option>
-                                    <option>Changi Airport Terminal 2</option>
-                                    <option>Changi Airport Terminal 3</option>
-                                    <option>Marina Bay Sands</option>
-                                    <option>Orchard Road (Orchard MRT)</option>
-                                    <option>Jurong East</option>
-                                    <option>Woodlands</option>
-                                </select>
-                                <div class="invalid-feedback">Please select a pick-up location.</div>
-                            </div>
-
-                            <!-- Dates -->
-                            <div class="col-sm-6">
-                                <label class="form-label" for="start_date_hero">Pick-up Date</label>
-                                <input type="date" class="form-control" name="start_date"
-                                       id="start_date_hero" required>
-                                <div class="invalid-feedback">Please select a pick-up date.</div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label" for="end_date_hero">Return Date</label>
-                                <input type="date" class="form-control" name="end_date"
-                                       id="end_date_hero" required>
-                                <div class="invalid-feedback">Please select a return date.</div>
-                            </div>
-
-                            <!-- Car Type -->
-                            <div class="col-12">
-                                <label class="form-label" for="car_type_hero">Car Type</label>
-                                <select class="form-select" name="type" id="car_type_hero">
-                                    <option value="">Any Type</option>
-                                    <option value="sedan">Sedan</option>
-                                    <option value="SUV">SUV</option>
-                                    <option value="MPV">MPV</option>
-                                    <option value="sports">Sports</option>
-                                </select>
-                            </div>
-
-                            <!-- Submit -->
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-warning w-100 fw-bold py-2">
-                                    <i class="bi bi-search me-2" aria-hidden="true"></i>
-                                    Search Available Cars
-                                </button>
+                    <div class="row g-3">
+                        <!-- Premium Vehicles -->
+                        <div class="col-6">
+                            <div class="vp-card">
+                                <div class="vp-card__icon">
+                                    <i class="bi bi-car-front-fill" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="vp-card__title">Premium Vehicles</h3>
+                                <p class="vp-card__desc">Late-model fleet, fully serviced and spotlessly maintained for every trip.</p>
                             </div>
                         </div>
-                    </form>
+                        <!-- Transparent Pricing -->
+                        <div class="col-6">
+                            <div class="vp-card">
+                                <div class="vp-card__icon">
+                                    <i class="bi bi-cash-coin" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="vp-card__title">Transparent Pricing</h3>
+                                <p class="vp-card__desc">No hidden fees. What you see is what you pay — guaranteed.</p>
+                            </div>
+                        </div>
+                        <!-- Islandwide Pickup -->
+                        <div class="col-6">
+                            <div class="vp-card">
+                                <div class="vp-card__icon">
+                                    <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="vp-card__title">Islandwide Pickup</h3>
+                                <p class="vp-card__desc">7 convenient locations across Singapore — airports, MRT hubs and hotels.</p>
+                            </div>
+                        </div>
+                        <!-- 24/7 Support -->
+                        <div class="col-6">
+                            <div class="vp-card">
+                                <div class="vp-card__icon">
+                                    <i class="bi bi-clock-fill" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="vp-card__title">24/7 Support</h3>
+                                <p class="vp-card__desc">Round-the-clock roadside assistance and customer service whenever you need it.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -345,23 +331,6 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Custom JS -->
 <script src="/assets/js/main.js"></script>
-
-<script>
-// Sync hero date validation (separate IDs from booking.php)
-(function() {
-    const s = document.getElementById('start_date_hero');
-    const e = document.getElementById('end_date_hero');
-    if (!s || !e) return;
-    const today = new Date().toISOString().split('T')[0];
-    s.setAttribute('min', today);
-    s.addEventListener('change', function() {
-        const d = new Date(this.value);
-        d.setDate(d.getDate() + 1);
-        e.setAttribute('min', d.toISOString().split('T')[0]);
-        if (e.value && e.value <= this.value) e.value = d.toISOString().split('T')[0];
-    });
-})();
-</script>
 
 </body>
 </html>

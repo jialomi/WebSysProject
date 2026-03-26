@@ -32,12 +32,13 @@ if (!$car) {
 $pageTitle = htmlspecialchars($car['brand'] . ' ' . $car['model']) . ' – DriveEasy Car Rentals';
 $csrf      = generateCsrfToken();
 
-// Build a set of carousel images (use same image with slight variation for demo)
-$carouselImages = [
-    $car['image_path'],
-    $car['image_path'],  // In production, store multiple image paths in a car_images table
-    $car['image_path'],
-];
+// Build carousel images from car_images table (fallback to single image_path)
+$imgStmt = $pdo->prepare("SELECT image_path FROM car_images WHERE car_id = :id ORDER BY sort_order, id");
+$imgStmt->execute([':id' => $carId]);
+$carouselImages = $imgStmt->fetchAll(PDO::FETCH_COLUMN);
+if (empty($carouselImages)) {
+    $carouselImages = [$car['image_path']];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

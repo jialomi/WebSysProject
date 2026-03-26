@@ -169,5 +169,18 @@ INSERT INTO promo_codes (code, discount_percent, expiry_date, is_active) VALUES
 ('EXPIRED5',   5.00, '2025-01-01', 0);
 
 -- ============================================================
+-- TABLE: car_images
+-- Multiple images per car for carousel display
+-- ============================================================
+CREATE TABLE IF NOT EXISTS car_images (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    car_id     INT          NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    sort_order TINYINT      NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ============================================================
 -- END OF SCHEMA
 -- ============================================================

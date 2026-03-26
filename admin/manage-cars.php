@@ -19,14 +19,48 @@ $pageTitle = 'Manage Cars – DriveEasy Admin';
 $csrf      = generateCsrfToken();
 $errors    = [];
 
-// ── Determine view mode ─────────────────────────────────────
-$editId = filter_input(INPUT_GET, 'edit',   FILTER_VALIDATE_INT);
-$delId  = filter_input(INPUT_GET, 'delete', FILTER_VALIDATE_INT);
+// ── Auto-create car_images table if it doesn't exist ────────
+$pdo->exec("
+    CREATE TABLE IF NOT EXISTS car_images (
+        id         INT AUTO_INCREMENT PRIMARY KEY,
+        car_id     INT          NOT NULL,
+        image_path VARCHAR(255) NOT NULL,
+        sort_order TINYINT      NOT NULL DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB
+");
 
-// ── HANDLE DELETE ───────────────────────────────────────────
+// ── Determine view mode ─────────────────────────────────────
+$editId   = filter_input(INPUT_GET, 'edit',         FILTER_VALIDATE_INT);
+$delId    = filter_input(INPUT_GET, 'delete',       FILTER_VALIDATE_INT);
+$delImgId = filter_input(INPUT_GET, 'delete_image', FILTER_VALIDATE_INT);
+
+// ── HANDLE DELETE IMAGE ────────────────────────────────────
+if ($delImgId) {
+    $imgStmt = $pdo->prepare("SELECT * FROM car_images WHERE id = :id LIMIT 1");
+    $imgStmt->execute([':id' => $delImgId]);
+    $imgRow = $imgStmt->fetch();
+    if ($imgRow) {
+        $pdo->prepare("DELETE FROM car_images WHERE id = :id")->execute([':id' => $delImgId]);
+        // If deleted image was the primary thumbnail, update cars.image_path
+        $carStmt = $pdo->prepare("SELECT image_path FROM cars WHERE id = :id LIMIT 1");
+        $carStmt->execute([':id' => $imgRow['car_id']]);
+        $currentCar = $carStmt->fetch();
+        if ($currentCar && $currentCar['image_path'] === $imgRow['image_path']) {
+            $nextStmt = $pdo->prepare("SELECT image_path FROM car_images WHERE car_id = :cid ORDER BY sort_order, id LIMIT 1");
+            $nextStmt->execute([':cid' => $imgRow['car_id']]);
+            $next = $nextStmt->fetchColumn() ?: 'assets/images/placeholder.jpg';
+            $pdo->prepare("UPDATE cars SET image_path = :img WHERE id = :id")->execute([':img' => $next, ':id' => $imgRow['car_id']]);
+        }
+        setFlash('success', 'Image deleted.');
+    }
+    header('Location: /admin/manage-cars.php?edit=' . (int)($imgRow['car_id'] ?? 0));
+    exit;
+}
+
+// ── HANDLE DELETE CAR ───────────────────────────────────────
 if ($delId) {
-    // Verify CSRF via GET token (simple approach; POST is safer — kept here for simplicity)
-    // Check if car has any non-cancelled bookings
     $hasBookings = $pdo->prepare(
         "SELECT COUNT(*) FROM bookings WHERE car_id = :id AND status != 'cancelled'"
     );
@@ -34,7 +68,6 @@ if ($delId) {
     if ((int)$hasBookings->fetchColumn() > 0) {
         setFlash('danger', 'Cannot delete car with active/confirmed bookings. Cancel those first.');
     } else {
-        // Delete the car record
         $pdo->prepare("DELETE FROM cars WHERE id = :id")->execute([':id' => $delId]);
         setFlash('success', 'Car deleted successfully.');
     }
@@ -43,7 +76,8 @@ if ($delId) {
 }
 
 // ── Fetch car being edited ──────────────────────────────────
-$editCar = null;
+$editCar    = null;
+$editImages = [];
 if ($editId) {
     $stmt = $pdo->prepare("SELECT * FROM cars WHERE id = :id LIMIT 1");
     $stmt->execute([':id' => $editId]);
@@ -52,6 +86,9 @@ if ($editId) {
         header('Location: /admin/manage-cars.php');
         exit;
     }
+    $imgStmt = $pdo->prepare("SELECT * FROM car_images WHERE car_id = :id ORDER BY sort_order, id");
+    $imgStmt->execute([':id' => $editId]);
+    $editImages = $imgStmt->fetchAll();
 }
 
 // ── HANDLE ADD / UPDATE (POST) ──────────────────────────────
@@ -87,64 +124,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$seats || $seats < 1 || $seats > 9)
                             $errors[] = 'Seats must be 1–9.';
 
-    // Handle image upload (optional)
-    $imagePath = $editCar['image_path'] ?? 'assets/images/placeholder.jpg';
-    if (!empty($_FILES['car_image']['name'])) {
-        $file = $_FILES['car_image'];
+    // Handle multiple image uploads (optional)
+    $uploadedPaths = [];
+    $allowedMimes  = ['image/jpeg', 'image/png', 'image/webp'];
+    $destDir       = dirname(__DIR__) . '/assets/images/';
+    if (!is_dir($destDir)) mkdir($destDir, 0755, true);
 
-        // Validate MIME type
-        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $mime  = $finfo->file($file['tmp_name']);
+    if (!empty($_FILES['car_images']['name'][0])) {
+        $fileCount = count($_FILES['car_images']['name']);
+        $finfo     = new finfo(FILEINFO_MIME_TYPE);
 
-        if (!in_array($mime, $allowedMimes)) {
-            $errors[] = 'Image must be JPEG, PNG, or WebP.';
-        } elseif ($file['size'] > 3 * 1024 * 1024) {
-            $errors[] = 'Image must be under 3 MB.';
-        } else {
-            // Sanitize filename and move to uploads dir
-            $ext      = pathinfo($file['name'], PATHINFO_EXTENSION);
+        for ($i = 0; $i < $fileCount; $i++) {
+            if ($_FILES['car_images']['error'][$i] !== UPLOAD_ERR_OK) continue;
+            $tmpName  = $_FILES['car_images']['tmp_name'][$i];
+            $size     = $_FILES['car_images']['size'][$i];
+            $origName = $_FILES['car_images']['name'][$i];
+            $mime     = $finfo->file($tmpName);
+
+            if (!in_array($mime, $allowedMimes)) {
+                $errors[] = '"' . htmlspecialchars($origName) . '" must be JPEG, PNG, or WebP.';
+                continue;
+            }
+            if ($size > 3 * 1024 * 1024) {
+                $errors[] = '"' . htmlspecialchars($origName) . '" exceeds 3 MB limit.';
+                continue;
+            }
+            $ext      = pathinfo($origName, PATHINFO_EXTENSION);
             $safeName = 'car_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
-            $destDir  = dirname(__DIR__) . '/assets/images/';
-            if (!is_dir($destDir)) mkdir($destDir, 0755, true);
-            $dest     = $destDir . $safeName;
-
-            if (move_uploaded_file($file['tmp_name'], $dest)) {
-                $imagePath = 'assets/images/' . $safeName;
+            if (move_uploaded_file($tmpName, $destDir . $safeName)) {
+                $uploadedPaths[] = 'assets/images/' . $safeName;
             } else {
-                $errors[] = 'Failed to upload image. Check folder permissions.';
+                $errors[] = 'Failed to upload "' . htmlspecialchars($origName) . '".';
             }
         }
     }
 
     if (empty($errors)) {
         if ($action === 'add') {
-            // INSERT new car
+            $primaryImage = $uploadedPaths[0] ?? 'assets/images/placeholder.jpg';
             $pdo->prepare(
                 "INSERT INTO cars (brand, model, year, type, daily_rate, status, image_path, description, seats, transmission, fuel_type)
                  VALUES (:brand, :model, :year, :type, :rate, :status, :img, :desc, :seats, :trans, :fuel)"
             )->execute([
                 ':brand'  => $brand,  ':model' => $model,   ':year'   => $year,
                 ':type'   => $type,   ':rate'  => $dailyRate,':status' => $status,
-                ':img'    => $imagePath, ':desc' => $description,
+                ':img'    => $primaryImage, ':desc' => $description,
                 ':seats'  => $seats,  ':trans' => $transmission, ':fuel' => $fuelType,
             ]);
+            $newCarId = (int)$pdo->lastInsertId();
+            // Insert into car_images table
+            $imgIns = $pdo->prepare("INSERT INTO car_images (car_id, image_path, sort_order) VALUES (:cid, :path, :ord)");
+            foreach ($uploadedPaths as $idx => $path) {
+                $imgIns->execute([':cid' => $newCarId, ':path' => $path, ':ord' => $idx]);
+            }
             setFlash('success', 'Car "' . htmlspecialchars($brand . ' ' . $model) . '" added successfully.');
+
         } elseif ($action === 'update' && $postId) {
-            // UPDATE existing car
             $pdo->prepare(
                 "UPDATE cars SET brand=:brand, model=:model, year=:year, type=:type,
-                                  daily_rate=:rate, status=:status, image_path=:img,
+                                  daily_rate=:rate, status=:status,
                                   description=:desc, seats=:seats, transmission=:trans,
                                   fuel_type=:fuel
                  WHERE id=:id"
             )->execute([
                 ':brand'  => $brand,  ':model' => $model,   ':year'   => $year,
                 ':type'   => $type,   ':rate'  => $dailyRate,':status' => $status,
-                ':img'    => $imagePath, ':desc' => $description,
+                ':desc'   => $description,
                 ':seats'  => $seats,  ':trans' => $transmission, ':fuel' => $fuelType,
                 ':id'     => $postId,
             ]);
+            // Append new images
+            if (!empty($uploadedPaths)) {
+                $maxOrdStmt = $pdo->prepare("SELECT COALESCE(MAX(sort_order),-1) FROM car_images WHERE car_id = :cid");
+                $maxOrdStmt->execute([':cid' => $postId]);
+                $maxOrd = (int)$maxOrdStmt->fetchColumn();
+                $imgIns = $pdo->prepare("INSERT INTO car_images (car_id, image_path, sort_order) VALUES (:cid, :path, :ord)");
+                foreach ($uploadedPaths as $idx => $path) {
+                    $imgIns->execute([':cid' => $postId, ':path' => $path, ':ord' => $maxOrd + 1 + $idx]);
+                }
+            }
+            // Sync primary thumbnail
+            $firstStmt = $pdo->prepare("SELECT image_path FROM car_images WHERE car_id = :cid ORDER BY sort_order, id LIMIT 1");
+            $firstStmt->execute([':cid' => $postId]);
+            $thumb = $firstStmt->fetchColumn() ?: 'assets/images/placeholder.jpg';
+            $pdo->prepare("UPDATE cars SET image_path = :img WHERE id = :id")->execute([':img' => $thumb, ':id' => $postId]);
             setFlash('success', 'Car updated successfully.');
         }
         header('Location: /admin/manage-cars.php');
@@ -252,7 +315,7 @@ $allCars = $pdo->query(
                                         <div class="text-muted small"><?= (int)$car['year'] ?></div>
                                     </td>
                                     <td>
-                                        <span class="badge car-card__badge badge-<?= htmlspecialchars($car['type']) ?>">
+                                        <span class="badge badge-<?= htmlspecialchars($car['type']) ?>">
                                             <?= htmlspecialchars(ucfirst($car['type'])) ?>
                                         </span>
                                     </td>
@@ -393,22 +456,34 @@ $allCars = $pdo->query(
                                       placeholder="Vehicle description visible to customers…"><?= htmlspecialchars($editCar['description'] ?? '') ?></textarea>
                         </div>
                         <div class="col-12">
-                            <label for="car_image" class="form-label fw-semibold">
-                                Car Image <?= $editCar ? '<span class="text-muted fw-normal">(leave blank to keep current)</span>' : '' ?>
+                            <label for="car_images" class="form-label fw-semibold">
+                                Car Images <?= $editCar ? '<span class="text-muted fw-normal">(upload to add more)</span>' : '' ?>
                             </label>
-                            <input type="file" class="form-control" id="car_image"
-                                   name="car_image" accept="image/jpeg,image/png,image/webp">
-                            <div class="form-text">JPEG / PNG / WebP, max 3 MB.</div>
-                            <?php if ($editCar && $editCar['image_path']): ?>
-                            <img id="imagePreview"
-                                 src="/<?= htmlspecialchars($editCar['image_path']) ?>"
-                                 alt="Current car image"
-                                 class="mt-2 rounded"
-                                 style="max-height:100px; object-fit:cover;"
-                                 onerror="this.style.display='none'">
-                            <?php else: ?>
-                            <img id="imagePreview" src="" alt="Image preview" class="mt-2 rounded"
-                                 style="max-height:100px; object-fit:cover; display:none;">
+                            <input type="file" class="form-control" id="car_images"
+                                   name="car_images[]" accept="image/jpeg,image/png,image/webp" multiple>
+                            <div class="form-text">JPEG / PNG / WebP, max 3 MB each. Select multiple files at once.</div>
+
+                            <?php if (!empty($editImages)): ?>
+                            <div class="mt-3">
+                                <label class="form-label fw-semibold small text-muted">Existing Images (<?= count($editImages) ?>)</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <?php foreach ($editImages as $img): ?>
+                                    <div class="position-relative" style="width:100px;">
+                                        <img src="/<?= htmlspecialchars($img['image_path']) ?>"
+                                             alt="Car image" class="rounded border"
+                                             style="width:100px;height:70px;object-fit:cover;"
+                                             onerror="this.src='/assets/images/placeholder.jpg'">
+                                        <a href="/admin/manage-cars.php?delete_image=<?= (int)$img['id'] ?>"
+                                           class="btn btn-danger btn-sm position-absolute top-0 end-0 p-0 d-flex align-items-center justify-content-center"
+                                           style="width:20px;height:20px;font-size:0.65rem;border-radius:50%;transform:translate(30%,-30%);"
+                                           title="Delete this image"
+                                           onclick="return confirm('Delete this image?')">
+                                            <i class="bi bi-x" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                             <?php endif; ?>
                         </div>
                     </div>
