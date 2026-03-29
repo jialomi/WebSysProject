@@ -199,8 +199,8 @@ $pickupLocations = [
 
     <!-- Server-side validation errors -->
     <?php if (!empty($errors)): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Please fix the following errors:</strong>
+    <div class="alert alert-danger alert-dismissible fade show no-auto-dismiss" role="alert">
+        <strong>Booking Unsuccessful</strong>
         <ul class="mb-0 mt-1">
             <?php foreach ($errors as $e): ?>
             <li><?= htmlspecialchars($e) ?></li>

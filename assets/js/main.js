@@ -350,7 +350,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* -- Auto-dismiss flash alerts after 5 seconds -- */
 (function autoDismissAlerts() {
-    document.querySelectorAll('.alert-dismissible').forEach(alert => {
+    document.querySelectorAll('.alert-dismissible:not(.no-auto-dismiss)').forEach(alert => {
         setTimeout(() => {
             const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
             if (bsAlert) bsAlert.close();
@@ -358,7 +358,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 })();
 
-/* -- Star rating interactive widget (testimonial form) -- */
+/* -- Star rating interactive widget -- */
 (function initStarRating() {
     const stars       = document.querySelectorAll('.star-input');
     const ratingInput = document.getElementById('rating');

@@ -497,23 +497,8 @@ img {
     border-bottom: none;
 }
 
-/* ── Testimonial Cards ────────────────────────────────────── */
-.testimonial-card {
-    background: #fff;
-    border-radius: var(--card-radius);
-    padding: 1.75rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-    border-left: 4px solid var(--brand-gold);
-    height: 100%;
-}
 
-.star-rating .bi-star-fill {
-    color: var(--brand-gold);
-}
 
-.star-rating .bi-star {
-    color: #dee2e6;
-}
 
 /* ── Status Badges (bookings) ─────────────────────────────── */
 .status-pending {

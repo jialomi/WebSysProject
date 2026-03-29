@@ -4,7 +4,7 @@
  * DriveEasy Car Rentals — Landing Page
  *
  * Sections: Hero + Search Widget, Stats Bar, Featured Cars,
- *           Why Choose Us, Testimonials
+ *           Why Choose Us
  */
 require_once __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -19,17 +19,7 @@ $stmt = $pdo->prepare(
 $stmt->execute();
 $featuredCars = $stmt->fetchAll();
 
-// ── Fetch active testimonials ───────────────────────────────
-$stmt = $pdo->prepare(
-    "SELECT t.*, u.name AS reviewer_name
-     FROM testimonials t
-     JOIN users u ON u.id = t.user_id
-     WHERE t.is_active = 1
-     ORDER BY t.created_at DESC
-     LIMIT 3"
-);
-$stmt->execute();
-$testimonials = $stmt->fetchAll();
+
 
 // ── Stats ───────────────────────────────────────────────────
 $totalCars  = $pdo->query("SELECT COUNT(*) FROM cars WHERE status='available'")->fetchColumn();
@@ -269,49 +259,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
     </div>
 </section>
 
-<!-- ── TESTIMONIALS ─────────────────────────────────────────── -->
-<?php if (!empty($testimonials)): ?>
-<section class="py-5" aria-labelledby="testimonials-heading">
-    <div class="container">
-        <div class="text-center mb-5">
-            <p class="section-label">Reviews</p>
-            <h2 class="section-title" id="testimonials-heading">What Our Customers Say</h2>
-        </div>
-        <div class="row g-4">
-            <?php foreach ($testimonials as $t): ?>
-            <div class="col-12 col-md-4">
-                <div class="testimonial-card">
-                    <!-- Star rating -->
-                    <div class="star-rating mb-3" role="img" aria-label="<?= (int)$t['rating'] ?> out of 5 stars">
-                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                            <i class="bi <?= $i <= (int)$t['rating'] ? 'bi-star-fill' : 'bi-star' ?>"
-                               aria-hidden="true"></i>
-                        <?php endfor; ?>
-                    </div>
-                    <p class="text-muted fst-italic mb-3">
-                        "<?= htmlspecialchars($t['message']) ?>"
-                    </p>
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center fw-bold"
-                             style="width:36px;height:36px;font-size:0.9rem;" aria-hidden="true">
-                            <?= strtoupper(substr($t['reviewer_name'], 0, 1)) ?>
-                        </div>
-                        <div>
-                            <div class="fw-semibold small">
-                                <?= htmlspecialchars($t['reviewer_name']) ?>
-                            </div>
-                            <div class="text-muted" style="font-size:0.75rem;">
-                                Verified Customer
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
+
 
 <!-- ── CTA BANNER ──────────────────────────────────────────── -->
 <section class="py-5 bg-warning" aria-label="Call to action">

@@ -26,7 +26,6 @@ $stats = [
     'total_users'    => $pdo->query("SELECT COUNT(*) FROM users WHERE role='user'")->fetchColumn(),
     'total_revenue'  => $pdo->query("SELECT COALESCE(SUM(total_cost),0) FROM bookings WHERE status!='cancelled'")->fetchColumn(),
     'unread_msgs'    => $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read=0")->fetchColumn(),
-    'pending_reviews'=> $pdo->query("SELECT COUNT(*) FROM testimonials WHERE is_active=0")->fetchColumn(),
 ];
 
 // ── Recent Bookings ─────────────────────────────────────────

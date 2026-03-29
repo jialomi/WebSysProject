@@ -65,21 +65,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     FOREIGN KEY (car_id)  REFERENCES cars(id)   ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ============================================================
--- TABLE: testimonials
--- Customer reviews linked to completed bookings
--- ============================================================
-CREATE TABLE IF NOT EXISTS testimonials (
-    id         INT AUTO_INCREMENT PRIMARY KEY,
-    user_id    INT  NOT NULL,
-    booking_id INT  DEFAULT NULL,
-    rating     TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    message    TEXT NOT NULL,
-    is_active  TINYINT(1) NOT NULL DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id)    REFERENCES users(id)    ON DELETE CASCADE,
-    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
+
 
 -- ============================================================
 -- TABLE: contact_messages
@@ -157,10 +143,7 @@ INSERT INTO bookings (user_id, car_id, pickup_location, start_date, end_date, to
 (3, 3, 'Changi Airport Terminal 2',   '2026-01-20', '2026-01-22', 360.00, 'confirmed', NULL,    0.00),
 (3, 5, 'Marina Bay Sands',            '2026-03-05', '2026-03-08', 315.00, 'pending',   NULL,    0.00);
 
-INSERT INTO testimonials (user_id, booking_id, rating, message, is_active) VALUES
-(2, 1, 5, 'Absolutely fantastic service! The Toyota Camry was spotless and the booking process was seamless. Will definitely rent again!', 1),
-(3, 3, 4, 'The Alphard was perfect for our family outing around Singapore. Very comfortable and clean. Pick-up was a breeze.', 1),
-(2, 2, 5, 'Booking online was super easy and the promo code worked perfectly. The Honda CR-V handled the mountain roads brilliantly.', 1);
+
 
 INSERT INTO promo_codes (code, discount_percent, expiry_date, is_active) VALUES
 ('SAVE10',    10.00, '2026-12-31', 1),

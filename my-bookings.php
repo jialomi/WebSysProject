@@ -33,41 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if ($action === 'review' && $bookingId) {
-        $rating  = filter_input(INPUT_POST, 'rating', FILTER_VALIDATE_INT);
-        $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS));
 
-        if ($rating < 1 || $rating > 5) $errors[] = 'Please select a star rating.';
-        if (strlen($message) < 10)      $errors[] = 'Review must be at least 10 characters.';
-
-        $checkStmt = $pdo->prepare("SELECT id FROM bookings WHERE id = :id AND user_id = :uid AND status = 'confirmed'");
-        $checkStmt->execute([':id' => $bookingId, ':uid' => $userId]);
-        $validBooking = $checkStmt->fetch();
-
-        if (empty($errors) && $validBooking) {
-            $existsStmt = $pdo->prepare("SELECT id FROM testimonials WHERE booking_id = :bid LIMIT 1");
-            $existsStmt->execute([':bid' => $bookingId]);
-            if ($existsStmt->fetch()) {
-                setFlash('warning', 'You have already submitted a review for this booking.');
-            } else {
-                $pdo->prepare("INSERT INTO testimonials (user_id, booking_id, rating, message, is_active) VALUES (:uid, :bid, :rating, :msg, 0)")
-                    ->execute([':uid' => $userId, ':bid' => $bookingId, ':rating' => $rating, ':msg' => $message]);
-                setFlash('success', 'Thank you for your review! It will appear once approved.');
-            }
-        } elseif (empty($errors)) {
-            setFlash('danger', 'Review could not be submitted for this booking.');
-        }
-
-        if (empty($errors)) {
-            header('Location: /my-bookings.php');
-            exit;
-        }
-    }
 }
 
 $bookingsStmt = $pdo->prepare(
-    "SELECT b.*, c.brand, c.model, c.year, c.type, c.image_path, c.daily_rate,
-            (SELECT id FROM testimonials WHERE booking_id = b.id LIMIT 1) AS reviewed
+    "SELECT b.*, c.brand, c.model, c.year, c.type, c.image_path, c.daily_rate
      FROM bookings b
      JOIN cars c ON c.id = b.car_id
      WHERE b.user_id = :uid
@@ -206,63 +176,10 @@ $bookings = $bookingsStmt->fetchAll();
             </form>
             <?php endif; ?>
 
-            <?php if ($booking['status'] === 'confirmed' && !$booking['reviewed']): ?>
-            <button class="btn btn-outline-warning btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#reviewModal<?= (int)$booking['id'] ?>">
-                <i class="bi bi-star me-1" aria-hidden="true"></i>Write Review
-            </button>
-            <?php elseif ($booking['reviewed']): ?>
-            <span class="ms-auto text-success small">
-                <i class="bi bi-check-circle me-1" aria-hidden="true"></i>Reviewed
-            </span>
-            <?php endif; ?>
+
         </div>
     </div>
 
-    <?php if ($booking['status'] === 'confirmed' && !$booking['reviewed']): ?>
-    <div class="modal fade" id="reviewModal<?= (int)$booking['id'] ?>" tabindex="-1" aria-labelledby="reviewModalLabel<?= (int)$booking['id'] ?>" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="h5 modal-title" id="reviewModalLabel<?= (int)$booking['id'] ?>">
-                        Review: <?= htmlspecialchars($booking['brand'] . ' ' . $booking['model']) ?>
-                    </h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="/my-bookings.php" class="needs-validation" novalidate>
-                    <div class="modal-body">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
-                        <input type="hidden" name="action" value="review">
-                        <input type="hidden" name="booking_id" value="<?= (int)$booking['id'] ?>">
-                        <input type="hidden" name="rating" id="rating" value="">
-
-                        <div class="mb-3 text-center">
-                            <label class="form-label fw-semibold d-block">Your Rating</label>
-                            <div class="fs-2">
-                                <?php for ($s = 1; $s <= 5; $s++): ?>
-                                <i class="bi bi-star star-input text-secondary"
-                                data-value="<?= $s ?>"
-                                style="cursor:pointer;" role="button"
-                                tabindex="0" aria-label="<?= $s ?> star<?= $s > 1 ? 's' : '' ?>">
-                                </i>
-                                <?php endfor; ?>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="message" class="form-label fw-semibold">Your Review <span class="text-danger" aria-hidden="true">*</span></label>
-                            <textarea class="form-control" name="message" id="message" rows="4" minlength="10" maxlength="500" placeholder="Tell us about your experience…" required></textarea>
-                            <div class="invalid-feedback">Please write at least 10 characters.</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-warning fw-bold">Submit Review</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
 
     <?php endforeach; ?>
     <?php endif; ?>
