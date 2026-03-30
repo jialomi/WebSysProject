@@ -22,7 +22,7 @@ $csrf      = generateCsrfToken();
 $errors    = [];
 $success   = false;
 
-// ── Resolve car_id from GET or POST ────────────────────────
+// Resolve car_id from GET or POST
 $carId = filter_input(INPUT_GET, 'car_id', FILTER_VALIDATE_INT)
       ?: filter_input(INPUT_POST, 'car_id', FILTER_VALIDATE_INT);
 
@@ -45,7 +45,7 @@ if (!$car) {
 $prefillStart = filter_input(INPUT_GET, 'start_date', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
 $prefillEnd   = filter_input(INPUT_GET, 'end_date',   FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
 
-// ── Handle POST (form submission) ──────────────────────────
+// Handle POST (form submission)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 1. CSRF validation
     validateCsrfToken();
@@ -212,7 +212,7 @@ $pickupLocations = [
 
     <div class="row g-5">
 
-        <!-- ── BOOKING FORM ────────────────────────────── -->
+        <!--BOOKING FORM -->
         <div class="col-12 col-lg-7">
             <div class="bg-white rounded-3 shadow-sm p-4 border">
                 <h2 class="h5 fw-bold mb-4">
@@ -338,7 +338,7 @@ $pickupLocations = [
             </div>
         </div>
 
-        <!-- ── COST SUMMARY ────────────────────────────── -->
+        <!-- COST SUMMARY -->
         <div class="col-12 col-lg-5">
             <div class="cost-box sticky-top" style="top:80px;" role="region" aria-label="Cost summary">
                 <h2 class="h6 fw-bold text-warning mb-4 text-uppercase letter-spacing-1">
