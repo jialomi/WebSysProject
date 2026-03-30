@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($password !== $confirmPassword)          $errors[] = 'Passwords do not match.';
 
-    // Check email uniqueness (prepared statement)
+    // Check email uniqueness
     if (empty($errors)) {
         $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = :email LIMIT 1");
         $checkStmt->execute([':email' => $formData['email']]);
