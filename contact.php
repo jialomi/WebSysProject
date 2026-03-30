@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="row g-5">
 
-        <!-- ── CONTACT FORM ────────────────────────────── -->
+        <!-- CONTACT FORM -->
         <div class="col-12 col-lg-7">
             <div class="card border-0 shadow-sm p-4">
                 <h2 class="h5 fw-bold mb-4">Send Us a Message</h2>
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
-        <!-- ── CONTACT INFO ────────────────────────────── -->
+        <!-- CONTACT INFO -->
         <div class="col-12 col-lg-5">
             <h2 class="h5 fw-bold mb-4">Get in Touch</h2>
 
