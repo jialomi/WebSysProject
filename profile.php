@@ -21,13 +21,13 @@ $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE id = 
 $stmt->execute([':id' => $userId]);
 $user = $stmt->fetch();
 
-// ── Handle profile update ───────────────────────────────────
+// Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    // ── Update name/email ───────────────────────────────────
+    // Update name/email
     if ($action === 'update_profile') {
         $name  = trim(filter_input(INPUT_POST, 'name',  FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?? '');
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ── Change password ─────────────────────────────────────
+    // Change password
     if ($action === 'change_password') {
         $current  = $_POST['current_password']  ?? '';
         $newPw    = $_POST['new_password']       ?? '';
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
 }
 
-// ── FIXED: Booking stats query ──────────────────────────────
+// Booking stats query
 $bookingCountStmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE user_id = :id");
 $bookingCountStmt->execute([':id' => $userId]);
 $bookingCount = (int)$bookingCountStmt->fetchColumn();
