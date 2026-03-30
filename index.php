@@ -12,7 +12,7 @@ require_once __DIR__ . '/includes/auth.php';
 $pageTitle = 'DriveEasy Car Rentals – Affordable Car Hire in Singapore';
 $csrf = generateCsrfToken();
 
-// ── Fetch 3 featured (available) cars ──────────────────────
+// Fetch 3 featured (available) cars
 $stmt = $pdo->prepare(
     "SELECT * FROM cars WHERE status = 'available' ORDER BY daily_rate DESC LIMIT 3"
 );
@@ -21,7 +21,7 @@ $featuredCars = $stmt->fetchAll();
 
 
 
-// ── Stats ───────────────────────────────────────────────────
+// Stats
 $totalCars  = $pdo->query("SELECT COUNT(*) FROM cars WHERE status='available'")->fetchColumn();
 $totalUsers = $pdo->query("SELECT COUNT(*) FROM users WHERE role='user'")->fetchColumn();
 $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
@@ -47,7 +47,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
 
 <main>
 
-<!-- ── HERO SECTION ────────────────────────────────────────── -->
+<!-- HERO SECTION -->
 <section class="hero-section" aria-label="Hero banner">
     <div class="container">
         <div class="row align-items-center g-5">
@@ -132,7 +132,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
     </div>
 </section>
 
-<!-- ── STATS BAR ───────────────────────────────────────────── -->
+<!--STATS BAR -->
 <section class="stats-bar py-4" aria-label="Company statistics">
     <div class="container">
         <div class="row g-3 justify-content-center text-center">
@@ -156,7 +156,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
     </div>
 </section>
 
-<!-- ── FEATURED CARS ───────────────────────────────────────── -->
+<!-- FEATURED CARS -->
 <section class="py-6 py-5 bg-white" aria-labelledby="featured-heading">
     <div class="container">
         <div class="text-center mb-5">
@@ -225,7 +225,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
     </div>
 </section>
 
-<!-- ── WHY CHOOSE US ───────────────────────────────────────── -->
+<!-- WHY CHOOSE US -->
 <section class="py-5 bg-light" aria-labelledby="why-heading">
     <div class="container">
         <div class="text-center mb-5">
@@ -261,7 +261,7 @@ $totalBooks = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
 
 
 
-<!-- ── CTA BANNER ──────────────────────────────────────────── -->
+<!-- CTA BANNER -->
 <section class="py-5 bg-warning" aria-label="Call to action">
     <div class="container text-center">
         <h2 class="fw-bold fs-2 mb-2">Ready to Hit the Road?</h2>
