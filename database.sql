@@ -1,7 +1,5 @@
 -- ============================================================
 -- DriveEasy Car Rentals - Database Schema & Seed Data
--- Compatible with MySQL 5.7+ / MariaDB 10.3+
--- Usage: Import via phpMyAdmin or run: mysql -u root -p < database.sql
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS driveeasy_db
