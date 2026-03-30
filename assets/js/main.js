@@ -1,5 +1,5 @@
 /**
- * assets/js/main.js
+ * File Location: assets/js/main.js
  * DriveEasy Car Rentals — All Custom JavaScript
  *
  * Sections:
@@ -19,14 +19,14 @@
    Reads the daily rate from a data attribute on the page.
    ============================================================ */
 (function initBookingCalculator() {
-    const startInput  = document.getElementById('start_date');
-    const endInput    = document.getElementById('end_date');
+    const startInput = document.getElementById('start_date');
+    const endInput = document.getElementById('end_date');
     const daysDisplay = document.getElementById('calcDays');
     const rateDisplay = document.getElementById('calcRate');
-    const subtotalEl  = document.getElementById('calcSubtotal');
-    const discountEl  = document.getElementById('calcDiscount');
-    const totalEl     = document.getElementById('calcTotal');
-    const totalInput  = document.getElementById('total_cost');  // hidden input
+    const subtotalEl = document.getElementById('calcSubtotal');
+    const discountEl = document.getElementById('calcDiscount');
+    const totalEl = document.getElementById('calcTotal');
+    const totalInput = document.getElementById('total_cost');  // hidden input
 
     if (!startInput || !endInput || !totalEl) return;  // Not on booking page
 
@@ -54,23 +54,23 @@
      * Updates all displayed cost figures and the hidden total_cost input.
      */
     function updateCost() {
-        const days     = calcDays();
+        const days = calcDays();
         const subtotal = days * dailyRate;
         const discount = subtotal * (window.promoDiscount / 100);
-        const total    = Math.max(0, subtotal - discount);
+        const total = Math.max(0, subtotal - discount);
 
-        if (daysDisplay)  daysDisplay.textContent  = days;
-        if (rateDisplay)  rateDisplay.textContent  = 'SGD ' + dailyRate.toFixed(2);
-        if (subtotalEl)   subtotalEl.textContent   = 'SGD ' + subtotal.toFixed(2);
-        if (discountEl)   discountEl.textContent   = discount > 0
+        if (daysDisplay) daysDisplay.textContent = days;
+        if (rateDisplay) rateDisplay.textContent = 'SGD ' + dailyRate.toFixed(2);
+        if (subtotalEl) subtotalEl.textContent = 'SGD ' + subtotal.toFixed(2);
+        if (discountEl) discountEl.textContent = discount > 0
             ? '- SGD ' + discount.toFixed(2)
             : 'SGD 0.00';
-        if (totalEl)      totalEl.textContent      = 'SGD ' + total.toFixed(2);
-        if (totalInput)   totalInput.value         = total.toFixed(2);
+        if (totalEl) totalEl.textContent = 'SGD ' + total.toFixed(2);
+        if (totalInput) totalInput.value = total.toFixed(2);
     }
 
     startInput.addEventListener('change', updateCost);
-    endInput.addEventListener('change',   updateCost);
+    endInput.addEventListener('change', updateCost);
 
     // Expose for promo checker to call after discount changes
     window.updateBookingCost = updateCost;
@@ -87,7 +87,7 @@
    ============================================================ */
 (function initDateValidation() {
     const startInput = document.getElementById('start_date');
-    const endInput   = document.getElementById('end_date');
+    const endInput = document.getElementById('end_date');
 
     if (!startInput || !endInput) return;
 
@@ -138,8 +138,8 @@
    Updates the booking calculator with any discount.
    ============================================================ */
 (function initPromoChecker() {
-    const promoBtn    = document.getElementById('applyPromoBtn');
-    const promoInput  = document.getElementById('promo_code');
+    const promoBtn = document.getElementById('applyPromoBtn');
+    const promoInput = document.getElementById('promo_code');
     const promoResult = document.getElementById('promoResult');
     const promoHidden = document.getElementById('applied_promo_code');
 
@@ -149,19 +149,19 @@
         const code = promoInput.value.trim().toUpperCase();
         if (!code) {
             promoResult.textContent = 'Please enter a promo code.';
-            promoResult.className   = 'text-warning small mt-1';
+            promoResult.className = 'text-warning small mt-1';
             return;
         }
 
-        promoBtn.disabled    = true;
+        promoBtn.disabled = true;
         promoResult.textContent = 'Checking…';
-        promoResult.className   = 'text-secondary small mt-1';
+        promoResult.className = 'text-secondary small mt-1';
 
         try {
             const response = await fetch('/api/check-promo.php', {
-                method:  'POST',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body:    'code=' + encodeURIComponent(code)
+                body: 'code=' + encodeURIComponent(code)
             });
 
             const data = await response.json();
@@ -186,7 +186,7 @@
             }
         } catch (err) {
             promoResult.textContent = 'Could not validate code. Please try again.';
-            promoResult.className   = 'text-danger small mt-1';
+            promoResult.className = 'text-danger small mt-1';
         } finally {
             promoBtn.disabled = false;
         }
@@ -207,13 +207,13 @@
    Filters car cards by type and max daily price without reload.
    ============================================================ */
 (function initFleetFilter() {
-    const typeFilter     = document.getElementById('filterType');
-    const priceFilter    = document.getElementById('filterPrice');
-    const priceLabel     = document.getElementById('filterPriceLabel');
-    const sortSelect     = document.getElementById('sortCars');
-    const carsContainer  = document.getElementById('carsGrid');
-    const noResultsEl    = document.getElementById('noResults');
-    const resultCountEl  = document.getElementById('resultCount');
+    const typeFilter = document.getElementById('filterType');
+    const priceFilter = document.getElementById('filterPrice');
+    const priceLabel = document.getElementById('filterPriceLabel');
+    const sortSelect = document.getElementById('sortCars');
+    const carsContainer = document.getElementById('carsGrid');
+    const noResultsEl = document.getElementById('noResults');
+    const resultCountEl = document.getElementById('resultCount');
 
     if (!carsContainer) return;
 
@@ -221,11 +221,11 @@
      * Reads all car cards and filters/sorts them based on current filter values.
      */
     function applyFilters() {
-        const selectedType  = typeFilter  ? typeFilter.value  : 'all';
-        const maxPrice      = priceFilter ? parseFloat(priceFilter.value) : Infinity;
-        const sortVal       = sortSelect  ? sortSelect.value  : 'default';
-        const searchQuery   = (document.getElementById('searchQuery')?.value || '')
-                              .trim().toLowerCase();
+        const selectedType = typeFilter ? typeFilter.value : 'all';
+        const maxPrice = priceFilter ? parseFloat(priceFilter.value) : Infinity;
+        const sortVal = sortSelect ? sortSelect.value : 'default';
+        const searchQuery = (document.getElementById('searchQuery')?.value || '')
+            .trim().toLowerCase();
 
         // Update price label
         if (priceLabel) {
@@ -238,12 +238,12 @@
         let visible = 0;
 
         cards.forEach(card => {
-            const cardType  = (card.dataset.type  || '').toLowerCase();
+            const cardType = (card.dataset.type || '').toLowerCase();
             const cardPrice = parseFloat(card.dataset.price || 0);
-            const cardText  = (card.dataset.search || '').toLowerCase();
+            const cardText = (card.dataset.search || '').toLowerCase();
 
-            const typeMatch   = selectedType === 'all' || cardType === selectedType.toLowerCase();
-            const priceMatch  = cardPrice <= maxPrice;
+            const typeMatch = selectedType === 'all' || cardType === selectedType.toLowerCase();
+            const priceMatch = cardPrice <= maxPrice;
             const searchMatch = !searchQuery || cardText.includes(searchQuery);
 
             if (typeMatch && priceMatch && searchMatch) {
@@ -257,9 +257,9 @@
         // Sort visible cards
         const visibleCards = cards.filter(c => c.style.display !== 'none');
         visibleCards.sort((a, b) => {
-            if (sortVal === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            if (sortVal === 'price-asc') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
             if (sortVal === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-            if (sortVal === 'name-asc')   return (a.dataset.search || '').localeCompare(b.dataset.search || '');
+            if (sortVal === 'name-asc') return (a.dataset.search || '').localeCompare(b.dataset.search || '');
             return 0; // default: keep original order
         });
         visibleCards.forEach(c => carsContainer.appendChild(c));
@@ -272,9 +272,9 @@
     }
 
     // Attach listeners
-    if (typeFilter)  typeFilter.addEventListener('change', applyFilters);
-    if (priceFilter) priceFilter.addEventListener('input',  applyFilters);
-    if (sortSelect)  sortSelect.addEventListener('change',  applyFilters);
+    if (typeFilter) typeFilter.addEventListener('change', applyFilters);
+    if (priceFilter) priceFilter.addEventListener('input', applyFilters);
+    if (sortSelect) sortSelect.addEventListener('change', applyFilters);
     const searchInput = document.getElementById('searchQuery');
     if (searchInput) searchInput.addEventListener('input', applyFilters);
 
@@ -297,7 +297,7 @@
             }
 
             // Extra: confirm password match on register form
-            const pw  = form.querySelector('#password');
+            const pw = form.querySelector('#password');
             const cpw = form.querySelector('#confirm_password');
             if (pw && cpw && pw.value !== cpw.value) {
                 e.preventDefault();
@@ -310,7 +310,7 @@
 
             // Extra: ensure booking dates are valid
             const start = form.querySelector('#start_date');
-            const end   = form.querySelector('#end_date');
+            const end = form.querySelector('#end_date');
             if (start && end && start.value && end.value) {
                 if (new Date(end.value) <= new Date(start.value)) {
                     e.preventDefault();
@@ -360,7 +360,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* -- Star rating interactive widget -- */
 (function initStarRating() {
-    const stars       = document.querySelectorAll('.star-input');
+    const stars = document.querySelectorAll('.star-input');
     const ratingInput = document.getElementById('rating');
 
     if (!stars.length || !ratingInput) return;
@@ -372,10 +372,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             stars.forEach(s => {
                 const sv = parseInt(s.dataset.value);
                 s.classList.toggle('bi-star-fill', sv <= val);
-                s.classList.toggle('bi-star',      sv >  val);
+                s.classList.toggle('bi-star', sv > val);
             });
         });
-        
+
         // Added keyboard support for accessibility
         star.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -410,7 +410,7 @@ document.querySelectorAll('.btn-cancel-booking').forEach(btn => {
 /* -- Image preview for admin car upload -- */
 (function initImagePreview() {
     const fileInput = document.getElementById('car_image');
-    const preview   = document.getElementById('imagePreview');
+    const preview = document.getElementById('imagePreview');
     if (!fileInput || !preview) return;
 
     fileInput.addEventListener('change', function () {
