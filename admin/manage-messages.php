@@ -18,7 +18,7 @@ requireAdmin();
 $pageTitle = 'Manage Messages – DriveEasy Admin';
 $csrf      = generateCsrfToken();
 
-// ── HANDLE POST ACTIONS ─────────────────────────────────────
+// HANDLE POST ACTIONS
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Filter parameters ───────────────────────────────────────
+// Filter parameters
 $filterRaw = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 $filter = in_array($filterRaw, ['all', 'unread', 'read']) ? $filterRaw : 'all';
 
@@ -70,7 +70,7 @@ if ($filter === 'unread') {
 
 $messages = $pdo->query($sql)->fetchAll();
 
-// ── Counts for badges ───────────────────────────────────────
+// Counts for badges
 $counts = [
     'all'    => (int) $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn(),
     'unread' => (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read = 0")->fetchColumn(),
@@ -266,7 +266,7 @@ $counts = [
     </div>
 </div>
 
-<!-- ── Message Detail Modals ─────────────────────────────────── -->
+<!-- Message Detail Modals  -->
 <?php foreach ($messages as $m):
     $isUnread = ($m['is_read'] == 0);
 ?>

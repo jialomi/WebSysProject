@@ -12,7 +12,7 @@ $pageTitle = 'Manage Bookings – DriveEasy Admin';
 $csrf      = generateCsrfToken();
 $errors    = [];
 
-// ── HANDLE STATUS UPDATE (POST) ─────────────────────────────
+// HANDLE STATUS UPDATE (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Filter parameters ───────────────────────────────────────
+// Filter parameters 
 $filterStatus = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'all';
 $searchQuery  = trim(filter_input(INPUT_GET, 'q', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 $editId       = filter_input(INPUT_GET, 'edit', FILTER_VALIDATE_INT);
@@ -160,7 +160,7 @@ foreach ($countStmt->fetchAll() as $row) {
                             </thead>
                             <tbody>
                                 <?php 
-                                $modalsHtml = ''; // W3C Fix: Store modals in variable
+                                $modalsHtml = ''; // Store modals in variable
                                 foreach ($bookings as $b): 
                                 ?>
                                 <tr>
@@ -219,7 +219,7 @@ foreach ($countStmt->fetchAll() as $row) {
                                 </tr>
 
                                 <?php 
-                                // W3C Fix: Capture modal HTML here to output outside the table later
+                                // Capture modal HTML here to output outside the table later
                                 ob_start(); 
                                 ?>
                                 <div class="modal fade" id="detailModal<?= (int)$b['id'] ?>" tabindex="-1" aria-labelledby="detailModalLabel<?= (int)$b['id'] ?>" aria-hidden="true">

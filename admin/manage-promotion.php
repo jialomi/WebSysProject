@@ -20,13 +20,13 @@ $pageTitle = 'Manage Promotions – DriveEasy Admin';
 $csrf      = generateCsrfToken();
 $errors    = [];
 
-// ── HANDLE POST ACTIONS ─────────────────────────────────────
+// HANDLE POST ACTIONS
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
     $action = isset($_POST['action']) ? $_POST['action'] : '';
 
-    // ── Create new promo code ────────────────────────────────
+    // Create new promo code
     if ($action === 'create') {
         $code     = strtoupper(trim($_POST['code'] ?? ''));
         $discount = floatval($_POST['discount_percent'] ?? 0);
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ── Update existing promo code ───────────────────────────
+    // Update existing promo code
     if ($action === 'update') {
         $promoId  = intval($_POST['promo_id'] ?? 0);
         $code     = strtoupper(trim($_POST['code'] ?? ''));
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // ── Toggle active/inactive ───────────────────────────────
+    // Toggle active/inactive 
     if ($action === 'toggle') {
         $promoId = intval($_POST['promo_id'] ?? 0);
         if ($promoId) {
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // ── Delete promo code ────────────────────────────────────
+    // Delete promo code 
     if ($action === 'delete') {
         $promoId = intval($_POST['promo_id'] ?? 0);
         if ($promoId) {
@@ -126,15 +126,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ── Fetch all promo codes ───────────────────────────────────
+// Fetch all promo codes 
 $promos = $pdo->query("SELECT * FROM promo_codes ORDER BY is_active DESC, expiry_date ASC")->fetchAll();
 
-// ── Counts for summary ──────────────────────────────────────
+// Counts for summary 
 $totalCount  = count($promos);
 $activeCount = 0;
 foreach ($promos as $p) { if ($p['is_active']) $activeCount++; }
 
-// ── Unread messages count for sidebar badge ─────────────────
+// Unread messages count for sidebar badge
 $unreadMsgCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read = 0")->fetchColumn();
 ?>
 <!DOCTYPE html>
@@ -333,7 +333,7 @@ $unreadMsgCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE
     </div>
 </div>
 
-<!-- ── Create Promo Modal ─────────────────────────────────────── -->
+<!-- Create Promo Modal -->
 <div class="modal fade" id="createPromoModal" tabindex="-1" aria-labelledby="createPromoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -380,7 +380,7 @@ $unreadMsgCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE
     </div>
 </div>
 
-<!-- ── Edit Promo Modals ──────────────────────────────────────── -->
+<!-- Edit Promo Modals -->
 <?php foreach ($promos as $p): ?>
 <div class="modal fade" id="editPromoModal<?= (int)$p['id'] ?>" tabindex="-1"
      aria-labelledby="editPromoLabel<?= (int)$p['id'] ?>" aria-hidden="true">

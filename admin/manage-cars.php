@@ -19,7 +19,7 @@ $pageTitle = 'Manage Cars – DriveEasy Admin';
 $csrf      = generateCsrfToken();
 $errors    = [];
 
-// ── Auto-create car_images table if it doesn't exist ────────
+// Auto-create car_images table if it doesn't exist
 $pdo->exec("
     CREATE TABLE IF NOT EXISTS car_images (
         id         INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,12 +31,12 @@ $pdo->exec("
     ) ENGINE=InnoDB
 ");
 
-// ── Determine view mode ─────────────────────────────────────
+// Determine view mode 
 $editId   = filter_input(INPUT_GET, 'edit',         FILTER_VALIDATE_INT);
 $delId    = filter_input(INPUT_GET, 'delete',       FILTER_VALIDATE_INT);
 $delImgId = filter_input(INPUT_GET, 'delete_image', FILTER_VALIDATE_INT);
 
-// ── HANDLE DELETE IMAGE ────────────────────────────────────
+// HANDLE DELETE IMAGE
 if ($delImgId) {
     $imgStmt = $pdo->prepare("SELECT * FROM car_images WHERE id = :id LIMIT 1");
     $imgStmt->execute([':id' => $delImgId]);
@@ -59,7 +59,7 @@ if ($delImgId) {
     exit;
 }
 
-// ── HANDLE DELETE CAR ───────────────────────────────────────
+// HANDLE DELETE CAR
 if ($delId) {
     $hasBookings = $pdo->prepare(
         "SELECT COUNT(*) FROM bookings WHERE car_id = :id AND status != 'cancelled'"
@@ -75,7 +75,7 @@ if ($delId) {
     exit;
 }
 
-// ── Fetch car being edited ──────────────────────────────────
+// Fetch car being edited
 $editCar    = null;
 $editImages = [];
 if ($editId) {
@@ -91,7 +91,7 @@ if ($editId) {
     $editImages = $imgStmt->fetchAll();
 }
 
-// ── HANDLE ADD / UPDATE (POST) ──────────────────────────────
+// HANDLE ADD / UPDATE (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ── Fetch all cars for listing ──────────────────────────────
+// Fetch all cars for listing
 $allCars = $pdo->query(
     "SELECT c.*, (SELECT COUNT(*) FROM bookings b WHERE b.car_id=c.id AND b.status!='cancelled') AS active_bookings
      FROM cars c ORDER BY c.created_at DESC"

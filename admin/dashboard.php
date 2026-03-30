@@ -17,7 +17,7 @@ requireAdmin();  // Redirects non-admins
 
 $pageTitle = 'Admin Dashboard – DriveEasy';
 
-// ── Summary Stats ───────────────────────────────────────────
+// Summary Stats 
 $stats = [
     'total_cars'     => $pdo->query("SELECT COUNT(*) FROM cars")->fetchColumn(),
     'available_cars' => $pdo->query("SELECT COUNT(*) FROM cars WHERE status='available'")->fetchColumn(),
@@ -28,7 +28,7 @@ $stats = [
     'unread_msgs'    => $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read=0")->fetchColumn(),
 ];
 
-// ── Recent Bookings ─────────────────────────────────────────
+// Recent Bookings
 $recentBookings = $pdo->query(
     "SELECT b.id, b.status, b.total_cost, b.created_at,
             u.name AS customer, c.brand, c.model
@@ -39,7 +39,7 @@ $recentBookings = $pdo->query(
      LIMIT 8"
 )->fetchAll();
 
-// ── Monthly Bookings for Chart.js (last 12 months) ─────────
+// Monthly Bookings for Chart.js (last 12 months)
 $monthlyData = $pdo->query(
     "SELECT month_key,
             DATE_FORMAT(STR_TO_DATE(CONCAT(month_key,'-01'), '%Y-%m-%d'), '%b %Y') AS month_label,
@@ -85,7 +85,7 @@ for ($i = 11; $i >= 0; $i--) {
     }
 }
 
-// ── Car type breakdown (doughnut chart) ────────────────────
+// Car type breakdown (doughnut chart)
 $carTypeData = $pdo->query(
     "SELECT type, COUNT(*) as cnt FROM cars GROUP BY type"
 )->fetchAll();
@@ -333,7 +333,8 @@ $carTypeData = $pdo->query(
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
 <script>
-// ── Bookings & Revenue Bar Chart ──────────────────────────
+
+// Bookings & Revenue Bar Chart 
 const bCtx = document.getElementById('bookingsChart').getContext('2d');
 new Chart(bCtx, {
     type: 'bar',
@@ -381,7 +382,7 @@ new Chart(bCtx, {
     }
 });
 
-// ── Fleet Doughnut Chart ──────────────────────────────────
+// Fleet Doughnut Chart 
 const fCtx = document.getElementById('fleetChart').getContext('2d');
 new Chart(fCtx, {
     type: 'doughnut',
