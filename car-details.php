@@ -93,7 +93,7 @@ if (empty($carouselImages)) {
 <div class="container py-5">
     <div class="row g-5">
 
-        <!-- ── LEFT: Carousel + Description ──────────────── -->
+        <!-- LEFT: Carousel + Description -->
         <div class="col-12 col-lg-7">
 
             <!-- Bootstrap Carousel -->
@@ -166,7 +166,7 @@ if (empty($carouselImages)) {
 
         </div>
 
-        <!-- ── RIGHT: Price Card + Quick Booking ─────────── -->
+        <!-- RIGHT: Price Card + Quick Booking -->
         <div class="col-12 col-lg-5">
 
             <!-- Price Card -->
