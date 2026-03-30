@@ -3,7 +3,7 @@
  * includes/auth.php
  * DriveEasy Car Rentals — Session-Based Authentication Helpers
  *
- * Include this file on every page that needs auth awareness.
+ * This file is included in every page that needs auth awareness.
  * Always include BEFORE any output (headers must be sendable).
  */
 
@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ── Authentication checks ────────────────────────────────────
+// Authentication checks
 
 /**
  * Returns true if a user is currently logged in.
@@ -65,7 +65,7 @@ function requireAdmin(): void
     }
 }
 
-// ── CSRF Protection ──────────────────────────────────────────
+// CSRF Protection
 
 /**
  * Generates a CSRF token and stores it in the session.
@@ -98,7 +98,7 @@ function validateCsrfToken(): void
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// ── Session helpers ──────────────────────────────────────────
+// Session helpers
 
 /**
  * Returns the logged-in user's ID, or null.

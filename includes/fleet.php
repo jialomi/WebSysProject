@@ -58,7 +58,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
 <div class="container py-5">
     <div class="row g-4">
 
-        <!-- ── FILTER SIDEBAR ──────────────────────────────── -->
+        <!-- FILTER SIDEBAR -->
         <aside class="col-12 col-lg-3" aria-label="Filter options">
             <div class="filter-bar sticky-top" style="top:80px;">
                 <h2 class="h6 fw-bold text-uppercase mb-4">
@@ -124,7 +124,7 @@ $maxRate = (float)($pdo->query("SELECT MAX(daily_rate) FROM cars")->fetchColumn(
             </div>
         </aside>
 
-        <!-- ── CAR GRID ────────────────────────────────────── -->
+        <!-- CAR GRID -->
         <div class="col-12 col-lg-9">
 
             <!-- Results count -->

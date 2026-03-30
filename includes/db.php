@@ -3,18 +3,15 @@
  * includes/db.php
  * DriveEasy Car Rentals — PDO Database Connection
  *
- * Returns a singleton PDO instance. All queries in this project
- * MUST use prepared statements through this connection.
- *
  * Usage:  require_once __DIR__ . '/db.php';
  *         $stmt = $pdo->prepare("SELECT ...");
  */
 
-// ── Database credentials ─────────────────────────────────────
+// Database credentials
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'driveeasy_db');
-define('DB_USER', 'inf1005-sqldev');       // Change for production
-define('DB_PASS', 'qwerty12345');           // Change for production
+define('DB_USER', 'inf1005-sqldev');       // Use ownself MySQL username
+define('DB_PASS', 'qwerty12345');           // Use ownself MySQL password
 define('DB_CHAR', 'utf8mb4');
 
 /**
