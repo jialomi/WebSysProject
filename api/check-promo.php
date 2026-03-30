@@ -3,9 +3,6 @@
  * api/check-promo.php
  * DriveEasy Car Rentals — AJAX Promo Code Validator
  *
- * Accepts POST: { code: string }
- * Returns JSON: { valid: bool, discount_percent: float, message: string }
- *
  * Security:
  *  - Only accepts POST requests
  *  - Uses PDO prepared statement
