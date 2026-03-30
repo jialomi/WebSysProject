@@ -13,7 +13,7 @@ $userId    = currentUserId();
 $csrf      = generateCsrfToken();
 $errors    = [];
 
-// ── Handle POST actions ─────────────────────────────────────
+// Handle POST actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     validateCsrfToken();
 
