@@ -2,8 +2,6 @@
 /**
  * about.php
  * DriveEasy Car Rentals — About Us Page
- *
- * Sections: Company story, Mission & values, Team
  */
 require_once __DIR__ . '/includes/auth.php';
 $pageTitle = 'About Us – DriveEasy Car Rentals';
@@ -39,7 +37,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
     </div>
 </div>
 
-<!-- ── COMPANY STORY ─────────────────────────────────────── -->
+<!-- ABOUT THE COMPANY -->
 <section class="py-5 bg-white" aria-labelledby="story-heading">
     <div class="container">
         <div class="row g-5 align-items-center">
@@ -78,7 +76,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
     </div>
 </section>
 
-<!-- ── MISSION & VALUES ──────────────────────────────────── -->
+<!-- COMPANY MISSION & VALUES -->
 <section class="py-5 bg-light" aria-labelledby="mission-heading">
     <div class="container">
         <div class="text-center mb-5">
@@ -122,7 +120,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
     </div>
 </section>
 
-<!-- ── TEAM ─────────────────────────────────────────────── -->
+<!-- OUR TEAM -->
 <section class="py-5 bg-white" aria-labelledby="team-heading">
     <div class="container">
         <div class="text-center mb-5">
@@ -133,10 +131,11 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
         <div class="row g-4 justify-content-center">
             <?php
             $team = [
-                ['Daniel Ng',      'CEO & Co-Founder',      'Leading DriveEasy with a vision to redefine mobility in Southeast Asia. Former automotive industry consultant.'],
-                ['Priya Ramasamy', 'COO & Co-Founder',      'Oversees operations and fleet management. Passionate about logistics and customer satisfaction.'],
-                ['Lim Wei Jie',    'CTO',                   'Built the DriveEasy platform from scratch. Full-stack engineer with a love for elegant, scalable systems.'],
-                ['Nurul Huda',     'Head of Customer Experience', 'Ensures every customer interaction is a positive one. 10+ years in hospitality and service.'],
+                ['Lee Zong Yang Jeremy',      'CEO & Co-Founder',      'Leading DriveEasy with a vision to redefine mobility in Southeast Asia. Former automotive industry consultant.'],
+                ['Chin Poh Loon', 'COO & Co-Founder',      'Oversees operations and fleet management. Passionate about logistics and customer satisfaction.'],
+                ['Ng Si Yuan Ryan',    'CTO',                   'Built the DriveEasy platform from scratch. Full-stack engineer with a love for elegant, scalable systems.'],
+                ['Damian Marcus Oliveiro',     'Head of Customer Experience', 'Ensures every customer interaction is a positive one. 10+ years in hospitality and service.'],
+                ['Vanniappan Saravana Kumar Thoshita',     'Head of Marketing', 'Ensures every customer interaction is a positive one. 10+ years in hospitality and service.'],
             ];
             foreach ($team as $member): ?>
             <div class="col-12 col-sm-6 col-lg-3">
@@ -157,7 +156,7 @@ $pageTitle = 'About Us – DriveEasy Car Rentals';
     </div>
 </section>
 
-<!-- ── MILESTONES TIMELINE ───────────────────────────────── -->
+<!-- MILESTONES TIMELINE -->
 <section class="py-5 bg-dark text-white" aria-labelledby="milestones-heading">
     <div class="container">
         <div class="text-center mb-5">
