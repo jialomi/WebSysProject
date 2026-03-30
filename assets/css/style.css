@@ -5,7 +5,7 @@
  * Colour palette: Dark (#212529) | Gold (#FFC107) | White (#FFFFFF)
  */
 
-/* ── CSS Custom Properties ────────────────────────────────── */
+/* CSS Custom Properties */
 :root {
     --brand-gold: #FFC107;
     --brand-gold-text: #735500;
@@ -21,13 +21,13 @@
     color: var(--brand-gold-text) !important;
 }
 
-/* Light-background muted text: #54595e on white/#f4f6f9 = 7.1:1 ✓ */
+/* Light-background muted text */
 .text-muted,
 .text-secondary {
     color: #54595e !important;
 }
 
-/* Dark-background muted text: #9ca3af on #212529 = 4.6:1 ✓ */
+/* Dark-background muted text */
 .bg-dark .text-muted,
 .bg-dark .text-secondary,
 .page-hero .text-muted,
@@ -65,7 +65,7 @@
     /* >4.5:1 on #212529 */
 }
 
-/* Dark-background warning text (bright gold) */
+/* Dark-background warning text */
 .bg-dark .text-warning,
 .page-hero .text-warning,
 .hero-section .text-warning,
@@ -74,10 +74,10 @@
     color: var(--brand-gold) !important;
 }
 
-/* Dark-background danger text (lighter red) */
+/* Dark-background danger text */
 .bg-dark .text-danger,
 .admin-sidebar .text-danger {
-    color: #f17a84 !important; /* >4.5:1 on #141618/#212529 */
+    color: #f17a84 !important;
 }
 
 .bg-warning {
@@ -89,7 +89,7 @@
     color: var(--brand-dark) !important;
 }
 
-/* ── Global ───────────────────────────────────────────────── */
+/* Global */
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
@@ -113,7 +113,7 @@ img {
     height: auto;
 }
 
-/* ── Scrollbar (WebKit) ───────────────────────────────────── */
+/* Scrollbar (WebKit) */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -131,7 +131,7 @@ img {
     background: #555;
 }
 
-/* ── Navbar ───────────────────────────────────────────────── */
+/* Navbar */
 #mainNav {
     border-bottom: 2px solid var(--brand-gold);
 }
@@ -160,10 +160,9 @@ img {
     width: auto;
 }
 
-/* ── Footer Links ─────────────────────────────────────────── */
+/* Footer Links */
 .footer-link {
     color: #adb5bd;
-    /* >4.5:1 on #212529 = 7.3:1 ✓ */
     transition: color var(--transition);
 }
 
@@ -179,7 +178,7 @@ img {
     color: var(--brand-gold) !important;
 }
 
-/* ── Hero Banner (index.php) ──────────────────────────────── */
+/* Hero Banner (index.php) */
 .hero-section {
     position: relative;
     min-height: 90vh;
@@ -229,7 +228,7 @@ img {
     color: var(--brand-gold);
 }
 
-/* ── Booking Search Widget ────────────────────────────────── */
+/* Booking Search Widget */
 .booking-widget {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
@@ -249,7 +248,6 @@ img {
 
 .booking-widget .form-label {
     color: rgba(255, 255, 255, 0.85);
-    /* boosted from 0.75 for >4.5:1 on dark hero ✓ */
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -257,7 +255,7 @@ img {
     margin-bottom: 0.4rem;
 }
 
-/* ── Value Proposition Container & Cards ──────────────────── */
+/* Value Proposition Container & Cards */
 .vp-container {
     background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(14px);
@@ -323,7 +321,7 @@ img {
     margin-bottom: 0;
 }
 
-/* ── Stats Bar ────────────────────────────────────────────── */
+/* Stats Bar */
 .stats-bar {
     background: var(--brand-gold);
 }
@@ -345,17 +343,15 @@ img {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: rgba(33, 37, 41, 0.85);
-    /* >4.5:1 on #FFC107 ✓ */
 }
 
-/* ── Section Headers ──────────────────────────────────────── */
+/* Section Headers */
 .section-label {
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--brand-gold-text);
-    /* #735500 >4.5:1 on white ✓ */
 }
 
 .section-title {
@@ -364,7 +360,7 @@ img {
     letter-spacing: -0.02em;
 }
 
-/* ── Car Cards ────────────────────────────────────────────── */
+/* Car Cards */
 .car-card {
     border: none;
     border-radius: var(--card-radius);
@@ -419,7 +415,6 @@ img {
     font-size: 0.8rem;
     font-weight: 400;
     color: #54595e;
-    /* >4.5:1 on #fff ✓ */
 }
 
 .car-card__specs {
@@ -427,7 +422,6 @@ img {
     gap: 1rem;
     font-size: 0.8rem;
     color: #54595e;
-    /* >4.5:1 on #fff ✓ */
 }
 
 /* Type badge colors */
@@ -436,27 +430,22 @@ img {
     color: #0b4a99;
 }
 
-/* >4.5:1 on #e3f2fd */
 .badge-SUV {
     background: #e8f5e9;
     color: #1e5a22;
 }
 
-/* >4.5:1 on #e8f5e9 */
 .badge-MPV {
     background: #fff3e0;
     color: #a33900;
 }
 
-/* >4.5:1 on #fff3e0, fixing original #e65100 */
 .badge-sports {
     background: #fce4ec;
     color: #9c1f1f;
 }
 
-/* >4.5:1 on #fce4ec */
-
-/* ── Filter Bar (fleet.php) ───────────────────────────────── */
+/* Filter Bar (fleet.php) */
 .filter-bar {
     background: #fff;
     border-radius: var(--card-radius);
@@ -469,7 +458,7 @@ img {
     accent-color: var(--brand-gold);
 }
 
-/* ── Booking Cost Box ─────────────────────────────────────── */
+/* Booking Cost Box */
 .cost-box {
     background: linear-gradient(135deg, var(--brand-dark), #2d3748);
     color: #fff;
@@ -488,7 +477,6 @@ img {
     justify-content: space-between;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.85);
-    /* boosted from 0.75 for >4.5:1 on dark ✓ */
     padding: 0.3rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -500,7 +488,7 @@ img {
 
 
 
-/* ── Status Badges (bookings) ─────────────────────────────── */
+/* Status Badges (bookings) */
 .status-pending {
     background: #fff3cd;
     color: #856404;
@@ -516,7 +504,7 @@ img {
     color: #842029;
 }
 
-/* ── Admin Sidebar ────────────────────────────────────────── */
+/* Admin Sidebar */
 .admin-sidebar {
     min-height: calc(100vh - 60px);
     background: var(--brand-darker);
@@ -525,7 +513,6 @@ img {
 
 .admin-sidebar .nav-link {
     color: rgba(255, 255, 255, 0.82);
-    /* boosted from 0.65 for >4.5:1 on #141618 ✓ */
     font-weight: 500;
     padding: 0.65rem 1.25rem;
     border-radius: 0.4rem;
@@ -556,7 +543,7 @@ img {
     transform: translateY(-4px);
 }
 
-/* ── Forms ────────────────────────────────────────────────── */
+/* Forms */
 .form-control:focus,
 .form-select:focus {
     border-color: var(--brand-gold);
@@ -579,7 +566,7 @@ img {
     box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
 }
 
-/* ── Page Hero (inner pages) ──────────────────────────────── */
+/* Page Hero (inner pages) */
 .page-hero {
     background: linear-gradient(135deg, var(--brand-darker), #1e2a3a);
     color: #fff;
@@ -598,7 +585,7 @@ img {
     background: var(--brand-gold);
 }
 
-/* ── Car Detail Carousel ──────────────────────────────────── */
+/* Car Detail Carousel */
 .car-detail-carousel .carousel-inner {
     border-radius: var(--card-radius);
     overflow: hidden;
@@ -628,11 +615,10 @@ img {
 
 .car-spec-item i {
     color: var(--brand-gold-text);
-    /* #735500 >4.5:1 on #F8F9FA ✓ */
     font-size: 1.1rem;
 }
 
-/* ── Availability Badge ───────────────────────────────────── */
+/* Availability Badge */
 .availability-available {
     background: #d1e7dd;
     color: #0f5132;
@@ -651,14 +637,14 @@ img {
     font-size: 0.85rem;
 }
 
-/* ── Promo code field ─────────────────────────────────────── */
+/* Promo code field */
 #promoResult {
     font-size: 0.85rem;
     min-height: 1.3em;
     transition: all 0.2s;
 }
 
-/* ── Team Cards (about.php) ───────────────────────────────── */
+/* Team Cards (about.php) */
 .team-card img {
     width: 100px;
     height: 100px;
@@ -666,7 +652,7 @@ img {
     border: 3px solid var(--brand-gold);
 }
 
-/* ── Responsive utilities ─────────────────────────────────── */
+/* Responsive utilities */
 @media (max-width: 767.98px) {
     .hero-section {
         min-height: 70vh;
@@ -700,7 +686,7 @@ img {
     }
 }
 
-/* ── Animations ───────────────────────────────────────────── */
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
